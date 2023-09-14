@@ -6,15 +6,19 @@ import AuthContext from "../context/AuthContext";
 
 interface Props {
   homes: Home[];
-  //   loadUserHomesHandler: () => void;
+  deleteHomeHandler: (id: string) => void;
 }
 
-const HomeList = ({ homes }: Props) => {
+const HomeList = ({ homes, deleteHomeHandler }: Props) => {
   const { user } = useContext(AuthContext);
   return (
     <ul className="HomeList">
       {homes.map((item) => (
-        <HomeCard home={item} key={item._id} />
+        <HomeCard
+          home={item}
+          key={item._id}
+          deleteHomeHandler={deleteHomeHandler}
+        />
       ))}
     </ul>
   );

@@ -5,9 +5,10 @@ import AuthContext from "../context/AuthContext";
 
 interface Props {
   home: Home;
+  deleteHomeHandler: (id: string) => void;
 }
 
-const HomeCard = ({ home }: Props) => {
+const HomeCard = ({ home, deleteHomeHandler }: Props) => {
   const { user } = useContext(AuthContext);
   return (
     <li className="HomeCard">
@@ -15,6 +16,7 @@ const HomeCard = ({ home }: Props) => {
       <p>State: {home.state}</p>
       <p>City: {home.city}</p>
       <p>Appliances: {home.appliances[0].name}</p>
+      <button onClick={() => deleteHomeHandler(home._id!)}>X</button>
     </li>
   );
 };

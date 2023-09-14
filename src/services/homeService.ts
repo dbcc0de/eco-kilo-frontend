@@ -14,3 +14,8 @@ export const addHome = async (home: Home): Promise<Home> => {
   console.log(home);
   return (await axios.post(`${baseURL}/users/homes`, home)).data;
 };
+
+// service for delete home
+export const deleteHome = async (id: string): Promise<void> => {
+  return await axios.delete(`${baseURL}/homes/${encodeURIComponent(id)}`);
+};
