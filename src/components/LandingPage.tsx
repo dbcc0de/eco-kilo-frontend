@@ -4,14 +4,20 @@ import "./LandingPage.css";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import Home from "../models/Home";
-import { addHome } from "../services/homeService";
+import { addHome, getHomes } from "../services/homeService";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
   const [homes, setHomes] = useState<Home[]>([]);
 
+  const loadUserHomesHandler = async (): Promise<void> => {
+    setHomes(await getHomes(user?.uid!));
+  };
+
   const addHomeHandler = async (home: Home): Promise<void> => {
     await addHome(home);
+    loadUserHomesHandler();
+    console.log(homes);
   };
 
   return (

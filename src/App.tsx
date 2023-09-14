@@ -7,6 +7,7 @@ import {
 import "./App.css";
 import Header from "./components/Header";
 import LandingPage from "./components/LandingPage";
+import UsersPage from "./components/UsersPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/homes" element={<UsersPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
