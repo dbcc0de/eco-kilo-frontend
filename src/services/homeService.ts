@@ -5,8 +5,12 @@ import Appliance from "../models/Appliance";
 const baseURL: string = process.env.REACT_APP_API_URL || "";
 
 // service to get all of a user's homes
+export const getHomes = async (googleId: string): Promise<Home[]> => {
+  return (await axios.get(`${baseURL}/users/${googleId}/homes`)).data;
+};
 
 // service for post, add home with appliances
 export const addHome = async (home: Home): Promise<Home> => {
-  return (await axios.post(`${baseURL}`, home)).data;
+  console.log(home);
+  return (await axios.post(`${baseURL}/users/homes`, home)).data;
 };
