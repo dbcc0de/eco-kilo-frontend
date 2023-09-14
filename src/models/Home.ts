@@ -6,5 +6,7 @@ export default interface Home {
   name: string;
   lat: number;
   lon: number;
+  city: string;
+  state: string;
   appliances: Appliance[];
 }

@@ -1,11 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import HomesForm from "./HomesForm";
 import "./LandingPage.css";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
+import Home from "../models/Home";
+import { addHome } from "../services/homeService";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
+  const [homes, setHomes] = useState<Home[]>([]);
+
+  const addHomeHandler = async (home: Home): Promise<void> => {
+    await addHome(home);
+  };
+
   return (
     <div className="LandingPage">
       <h2>Here's how Eco Kilo Works:</h2>
@@ -18,8 +26,7 @@ const LandingPage = () => {
       {/* link to user form that inputs homes data */}
       {user ? (
         <>
-          <HomesForm />
-          <button>Submit your home data</button>
+          <HomesForm addHomeHandler={addHomeHandler} />
         </>
       ) : (
         <>
