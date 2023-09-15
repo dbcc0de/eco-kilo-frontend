@@ -7,9 +7,10 @@ import AuthContext from "../context/AuthContext";
 interface Props {
   homes: Home[];
   deleteHomeHandler: (id: string) => void;
+  editHomeHandler: (home: Home) => void;
 }
 
-const HomeList = ({ homes, deleteHomeHandler }: Props) => {
+const HomeList = ({ homes, deleteHomeHandler, editHomeHandler }: Props) => {
   const { user } = useContext(AuthContext);
   return (
     <ul className="HomeList">
@@ -18,6 +19,7 @@ const HomeList = ({ homes, deleteHomeHandler }: Props) => {
           home={item}
           key={item._id}
           deleteHomeHandler={deleteHomeHandler}
+          editHomeHandler={editHomeHandler}
         />
       ))}
     </ul>
