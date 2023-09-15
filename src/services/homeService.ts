@@ -19,3 +19,9 @@ export const addHome = async (home: Home): Promise<Home> => {
 export const deleteHome = async (id: string): Promise<void> => {
   return await axios.delete(`${baseURL}/homes/${encodeURIComponent(id)}`);
 };
+
+// service for put, update home and appliances
+export const editHome = async (home: Home, id: string): Promise<Home> => {
+  return (await axios.put(`${baseURL}/homes/${encodeURIComponent(id)}`, home))
+    .data;
+};

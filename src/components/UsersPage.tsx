@@ -2,7 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import "./UsersPage.css";
 import Home from "../models/Home";
 import AuthContext from "../context/AuthContext";
-import { addHome, deleteHome, getHomes } from "../services/homeService";
+import {
+  addHome,
+  deleteHome,
+  editHome,
+  getHomes,
+} from "../services/homeService";
 import HomesForm from "./HomesForm";
 import HomeList from "./HomeList";
 
@@ -30,9 +35,18 @@ const UsersPage = () => {
     loadUserHomesHandler();
   };
 
+  const editHomeHandler = async (home: Home): Promise<void> => {
+    await editHome(home, home._id!);
+    loadUserHomesHandler();
+  };
+
   return (
     <div className="UsersPage">
-      <HomeList homes={homes} deleteHomeHandler={deleteHomeHandler} />
+      <HomeList
+        homes={homes}
+        deleteHomeHandler={deleteHomeHandler}
+        editHomeHandler={editHomeHandler}
+      />
       <HomesForm addHomeHandler={addHomeHandler} />
     </div>
   );
