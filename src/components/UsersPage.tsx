@@ -10,6 +10,7 @@ import {
 } from "../services/homeService";
 import HomesForm from "./HomesForm";
 import HomeList from "./HomeList";
+import MUIMaps from "./MUIMaps";
 
 const UsersPage = () => {
   const [homes, setHomes] = useState<Home[]>([]);
@@ -42,11 +43,17 @@ const UsersPage = () => {
 
   return (
     <div className="UsersPage">
-      <HomeList
-        homes={homes}
-        deleteHomeHandler={deleteHomeHandler}
-        editHomeHandler={editHomeHandler}
-      />
+      {homes.length ? (
+        <>
+          <HomeList
+            homes={homes}
+            deleteHomeHandler={deleteHomeHandler}
+            editHomeHandler={editHomeHandler}
+          />
+        </>
+      ) : (
+        <p>Here is loading screen</p>
+      )}
       <HomesForm addHomeHandler={addHomeHandler} />
     </div>
   );

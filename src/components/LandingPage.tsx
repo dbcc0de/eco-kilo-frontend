@@ -18,6 +18,8 @@ const LandingPage = () => {
     await addHome(home);
     loadUserHomesHandler();
     console.log(homes);
+    console.log(home.lat);
+    console.log(home.lon);
   };
 
   return (

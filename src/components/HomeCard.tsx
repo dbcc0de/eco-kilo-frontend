@@ -3,6 +3,8 @@ import Home from "../models/Home";
 import "./HomeCard.css";
 import AuthContext from "../context/AuthContext";
 import Appliance from "../models/Appliance";
+import { Link } from "react-router-dom";
+import EnergyResults from "./EnergyResults";
 
 interface Props {
   home: Home;
@@ -16,6 +18,8 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
   const [homeName, setHomeName] = useState(home.name || "");
   const [city, setCity] = useState(home.city || "");
   const [state, setState] = useState(home.state || "");
+  const [collapse, setCollapse] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   // const [applianceName, setApplianceName] = useState(home.appliances || "");
   // const [applianceKwh, setApplianceKwh] = useState(home.appliances || "");
   // const [applianceStart, setApplianceStart] = useState("7");
@@ -176,15 +180,43 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
             );
           })}
           <button>Submit Changes</button>
+          <button onClick={() => setOpenToEdit(false)}>Cancel</button>
         </form>
       ) : (
         <>
           <p>Home: {home.name}</p>
           <p>State: {home.state}</p>
           <p>City: {home.city}</p>
-          <p>Appliances: {home.appliances[0].name}</p>
+          <p>Appliances: </p>
+          {!collapse ? (
+            <button onClick={() => setCollapse(true)}>Arrow Open</button>
+          ) : (
+            <ul>
+              {home.appliances.map((item) => (
+                <li>
+                  <p>Name: {item.name}</p>
+                  <p>kWh: {item.kwh}</p>
+                  <p>Start Time: {item.startTime}</p>
+                  <p>End Time: {item.endTime}</p>
+                </li>
+              ))}
+              <button onClick={() => setCollapse(false)}>Arrow Collapse</button>
+            </ul>
+          )}
           <button onClick={() => setOpenToEdit(true)}>Edit</button>{" "}
-          <button onClick={() => deleteHomeHandler(home._id!)}>X</button>
+          <button onClick={() => deleteHomeHandler(home._id!)}>
+            Delete Home
+          </button>
+          {!showResults ? (
+            <button onClick={() => setShowResults(true)}>
+              View My Energy Data
+            </button>
+          ) : (
+            <>
+              <EnergyResults home={home} />
+              <button onClick={() => setShowResults(false)}>Close Data</button>
+            </>
+          )}
         </>
       )}
     </li>

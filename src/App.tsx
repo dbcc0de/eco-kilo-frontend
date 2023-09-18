@@ -8,6 +8,7 @@ import "./App.css";
 import Header from "./components/Header";
 import LandingPage from "./components/LandingPage";
 import UsersPage from "./components/UsersPage";
+import EnergyResults from "./components/EnergyResults";
 
 function App() {
   return (
