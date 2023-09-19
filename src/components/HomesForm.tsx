@@ -14,8 +14,6 @@ const HomesForm = ({ addHomeHandler }: Props) => {
   const [homeName, setHomeName] = useState("");
   // need to find out how to convert location to lat and long
   // is there an input method for city / state (are users just in US?)
-  const [suggestions, setSuggestions] = useState([]);
-  const [placeDetail, setPlaceDetail] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [applianceName, setApplianceName] = useState("");
@@ -25,14 +23,6 @@ const HomesForm = ({ addHomeHandler }: Props) => {
   // need to set a status to loading or submitting when form submits and is waiting
   // const [status, setStatus] = useState("Submitting")
   const navigate = useNavigate();
-
-  const loadSuggestions = async (inputValue: string) => {
-    //
-  };
-
-  const handleSuggestionSelected = async (suggestion: string) => {
-    //
-  };
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -61,6 +51,7 @@ const HomesForm = ({ addHomeHandler }: Props) => {
     // or else take in city state (search for city / state api)
     // insert city state
     console.log(home);
+    // get lat lon from service function
     addHomeHandler(home);
 
     //Navigate to /homes
@@ -78,13 +69,11 @@ const HomesForm = ({ addHomeHandler }: Props) => {
         id="homeName"
         value={homeName}
         onChange={(e) => {
-          const newValue = e.target.value;
-          setPlaceDetail(undefined);
-          loadSuggestions(newValue);
+          setHomeName(e.target.value);
         }}
       />
       <MUIMaps setCity={setCity} setState={setState} />
-      <label htmlFor="city">City: </label>
+      {/* <label htmlFor="city">City: </label>
       <input
         type="text"
         name="city"
@@ -99,7 +88,7 @@ const HomesForm = ({ addHomeHandler }: Props) => {
         id="state"
         value={state}
         onChange={(e) => setState(e.target.value)}
-      />
+      /> */}
       <button>Submit your home data</button>
       <div id="googlemaps-attribution-container"></div>
     </form>

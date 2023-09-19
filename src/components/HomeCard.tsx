@@ -192,8 +192,8 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
             <button onClick={() => setCollapse(true)}>Arrow Open</button>
           ) : (
             <ul>
-              {home.appliances.map((item) => (
-                <li>
+              {home.appliances.map((item, index) => (
+                <li key={item.name + index}>
                   <p>Name: {item.name}</p>
                   <p>kWh: {item.kwh}</p>
                   <p>Start Time: {item.startTime}</p>
