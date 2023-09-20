@@ -1,4 +1,16 @@
-export default interface GeocodeResponse {
+interface Location {
   lat: number;
-  lon: number;
+  lng: number;
+}
+
+interface Geometry {
+  location: Location;
+}
+
+interface Result {
+  geometry: Geometry;
+}
+
+export default interface GeocodeResponse {
+  results: Result[];
 }

@@ -1,11 +1,43 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import "./ApplianceForm.css";
+import Home from "../models/Home";
+import Appliance from "../models/Appliance";
+import { editHome } from "../services/homeService";
 
-const ApplianceForm = () => {
-  const [] = useState("");
+interface Props {
+  home: Home;
+  editHomeHandler: (home: Home) => void;
+}
+
+const ApplianceForm = ({ home, editHomeHandler }: Props) => {
+  const [applianceName, setApplianceName] = useState("");
+  const [applianceKwh, setApplianceKwh] = useState(0);
+  const [applianceStart, setApplianceStart] = useState(0);
+  const [applianceStop, setApplianceStop] = useState(0);
+
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
+    e.preventDefault();
+    const addedAppliance: Appliance = {
+      name: applianceName,
+      kwh: applianceKwh,
+      startTime: applianceStart,
+      endTime: applianceStop,
+    };
+
+    const homeCopy = {
+      ...home,
+      appliances: home.appliances
+        ? [...home.appliances, addedAppliance]
+        : [addedAppliance],
+    };
+    editHomeHandler(homeCopy);
+    console.log(homeCopy);
+  };
+
   return (
-    <form className="ApplianceForm">
-      {/* <label htmlFor="applianceName">Appliance Name:</label>
+    <form className="ApplianceForm" onSubmit={(e) => handleSubmit(e)}>
+      <p>Appliance Form works</p>
+      <label htmlFor="applianceName">Appliance Name:</label>
       <input
         type="text"
         name="applianceName"
@@ -19,7 +51,7 @@ const ApplianceForm = () => {
         name="applianceKwh"
         id="applianceKwh"
         value={applianceKwh}
-        onChange={(e) => setApplianceKwh(e.target.value)}
+        onChange={(e) => setApplianceKwh(Number(e.target.value))}
       />
       <label htmlFor="applianceStart">Appliance Start to Stop Time:</label>
       <input
@@ -30,23 +62,24 @@ const ApplianceForm = () => {
         name="applianceStart"
         id="applianceStart"
         value={applianceStart}
-        onChange={(e) => setApplianceStart(e.target.value)}
+        onChange={(e) => setApplianceStart(Number(e.target.value))}
       />
       <p>
-        {applianceStart}:00 - {applianceEnd}:00
+        {applianceStart}:00 - {applianceStop}:00
       </p>
-      <label htmlFor="applianceEnd">Appliance Start to Stop Time:</label>
+      <label htmlFor="applianceStop">Appliance Start to Stop Time:</label>
 
       <input
         type="range"
         min={0}
         max={24}
         step={1}
-        name="applianceEnd"
-        id="applianceEnd"
-        value={applianceEnd}
-        onChange={(e) => setApplianceEnd(e.target.value)}
-      /> */}
+        name="applianceStop"
+        id="applianceStop"
+        value={applianceStop}
+        onChange={(e) => setApplianceStop(Number(e.target.value))}
+      />
+      <button>Confirm Add Appliance</button>
     </form>
   );
 };

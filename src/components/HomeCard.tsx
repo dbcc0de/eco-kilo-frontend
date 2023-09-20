@@ -5,6 +5,8 @@ import AuthContext from "../context/AuthContext";
 import Appliance from "../models/Appliance";
 import { Link } from "react-router-dom";
 import EnergyResults from "./EnergyResults";
+import MUIMaps from "./MUIMaps";
+import { getLatLon } from "../services/latLonService";
 
 interface Props {
   home: Home;
@@ -30,17 +32,32 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
 
   const handleEditSubmission = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
+    const geocodeLatLon = await getLatLon(city, state);
     const updatedHome: Home = {
       _id: home._id,
       googleId: user?.uid!,
       name: homeName,
-      lat: 0,
-      lon: 0,
+      lat: geocodeLatLon.results[0].geometry.location.lat || 42.2808256,
+      lon: geocodeLatLon.results[0].geometry.location.lng || -83.7430378,
       city: city,
       state: state,
       appliances,
     };
     editHomeHandler(updatedHome);
+    setOpenToEdit(false);
+  };
+
+  const handleRemoveAppliance = async (index: number): Promise<void> => {
+    // need to send back home with updated appliance array
+    const copy = {
+      ...home,
+    };
+    const updatedAppliances = [
+      ...home.appliances!.slice(0, index),
+      ...home.appliances!.slice(index + 1),
+    ];
+    copy.appliances = updatedAppliances;
+    editHomeHandler(copy);
   };
 
   return (
@@ -55,23 +72,8 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
             value={homeName}
             onChange={(e) => setHomeName(e.target.value)}
           />
-          <label htmlFor="city">City: </label>
-          <input
-            type="text"
-            name="city"
-            id="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <label htmlFor="state">State: </label>
-          <input
-            type="text"
-            name="state"
-            id="state"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-          />
-          {home.appliances.map((item, index) => {
+          <MUIMaps setCity={setCity} setState={setState} />
+          {home.appliances?.map((item, index) => {
             return (
               <div key={item.name + index}>
                 <label htmlFor="applianceName">Appliance Name:</label>
@@ -179,31 +181,39 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
               </div>
             );
           })}
-          <button>Submit Changes</button>
-          <button onClick={() => setOpenToEdit(false)}>Cancel</button>
+          <button type="submit">Submit Changes</button>
+          <button type="button" onClick={() => setOpenToEdit(false)}>
+            Cancel
+          </button>
         </form>
       ) : (
         <>
+          {/* Shows data from DB, does not update when form submits unless changed to state variables */}
           <p>Home: {home.name}</p>
-          <p>State: {home.state}</p>
           <p>City: {home.city}</p>
+          <p>State: {home.state}</p>
+
           <p>Appliances: </p>
           {!collapse ? (
             <button onClick={() => setCollapse(true)}>Arrow Open</button>
           ) : (
             <ul>
-              {home.appliances.map((item, index) => (
+              {home.appliances?.map((item, index) => (
                 <li key={item.name + index}>
                   <p>Name: {item.name}</p>
                   <p>kWh: {item.kwh}</p>
                   <p>Start Time: {item.startTime}</p>
                   <p>End Time: {item.endTime}</p>
+                  {/* Splice out the appliance at index y */}
+                  <button onClick={() => handleRemoveAppliance(index)}>
+                    Remove Appliance
+                  </button>
                 </li>
               ))}
               <button onClick={() => setCollapse(false)}>Arrow Collapse</button>
             </ul>
           )}
-          <button onClick={() => setOpenToEdit(true)}>Edit</button>{" "}
+          <button onClick={() => setOpenToEdit(true)}>Edit</button>
           <button onClick={() => deleteHomeHandler(home._id!)}>
             Delete Home
           </button>
