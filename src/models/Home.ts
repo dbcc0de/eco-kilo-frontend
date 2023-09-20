@@ -8,5 +8,5 @@ export default interface Home {
   lon: number;
   city: string;
   state: string;
-  appliances: Appliance[];
+  appliances?: Appliance[];
 }

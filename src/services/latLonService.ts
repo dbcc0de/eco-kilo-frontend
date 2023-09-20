@@ -1,4 +1,5 @@
 import axios from "axios";
+import GeocodeResponse from "../models/GeocodeResponse";
 
 const key = process.env.REACT_APP_API_KEY_GOOGLE || "";
 
@@ -15,9 +16,12 @@ replace  void with interface
 use axios to hit same endpoint as postman /geocode/?...
 
 */
-export const getLatLon = async (city: string, state: string): Promise<void> => {
+export const getLatLon = async (
+  city: string,
+  state: string
+): Promise<GeocodeResponse> => {
   return (
-    await axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
+    await axios.get("https://maps.googleapis.com/maps/api/geocode/json?", {
       params: { address: `${city} ${state}`, key },
     })
   ).data;

@@ -4,6 +4,7 @@ import AuthContext from "../context/AuthContext";
 import Home from "../models/Home";
 import { useNavigate } from "react-router-dom";
 import MUIMaps from "./MUIMaps";
+import { getLatLon } from "../services/latLonService";
 
 interface Props {
   addHomeHandler: (home: Home) => void;
@@ -12,49 +13,24 @@ interface Props {
 const HomesForm = ({ addHomeHandler }: Props) => {
   const { user } = useContext(AuthContext);
   const [homeName, setHomeName] = useState("");
-  // need to find out how to convert location to lat and long
-  // is there an input method for city / state (are users just in US?)
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [applianceName, setApplianceName] = useState("");
-  const [applianceKwh, setApplianceKwh] = useState("");
-  const [applianceStart, setApplianceStart] = useState("7");
-  const [applianceEnd, setApplianceEnd] = useState("15");
-  // need to set a status to loading or submitting when form submits and is waiting
-  // const [status, setStatus] = useState("Submitting")
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    // does lat lon API go here first?
+    const geocodeLatLon = await getLatLon(city, state);
+    console.log(geocodeLatLon);
     const home: Home = {
       googleId: user?.uid!,
       name: homeName,
-      lat: 0,
-      lon: 0,
+      lat: geocodeLatLon.results[0].geometry.location.lat || 42.2808256,
+      lon: geocodeLatLon.results[0].geometry.location.lng || -83.7430378,
       city: city,
       state: state,
-      appliances: [
-        {
-          name: applianceName,
-          kwh: Number(applianceKwh),
-          startTime: Number(applianceStart),
-          endTime: Number(applianceEnd),
-        },
-      ],
     };
-    // use geolocation if x is true (state variable)
-    navigator.geolocation.getCurrentPosition((res) => {
-      home.lat = res.coords.latitude;
-      home.lon = res.coords.longitude;
-    });
-    // or else take in city state (search for city / state api)
-    // insert city state
-    console.log(home);
-    // get lat lon from service function
+    // home.appliances = arrayOfAppliances
     addHomeHandler(home);
-
-    //Navigate to /homes
     navigate("/homes");
     console.log(city);
     console.log(state);
@@ -73,22 +49,6 @@ const HomesForm = ({ addHomeHandler }: Props) => {
         }}
       />
       <MUIMaps setCity={setCity} setState={setState} />
-      {/* <label htmlFor="city">City: </label>
-      <input
-        type="text"
-        name="city"
-        id="city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <label htmlFor="state">State: </label>
-      <input
-        type="text"
-        name="state"
-        id="state"
-        value={state}
-        onChange={(e) => setState(e.target.value)}
-      /> */}
       <button>Submit your home data</button>
       <div id="googlemaps-attribution-container"></div>
     </form>
