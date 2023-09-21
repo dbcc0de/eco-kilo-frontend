@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import "./ApplianceForm.css";
 import Home from "../models/Home";
 import Appliance from "../models/Appliance";
-import { editHome } from "../services/homeService";
+import defaultApplianceArray from "../specs/defaultKwh";
 
 interface Props {
   home: Home;
@@ -18,22 +18,34 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    const addedAppliance: Appliance = {
-      name: applianceName,
-      kwh: applianceKwh,
-      startTime: applianceStart,
-      endTime: applianceStop,
-    };
+    if (applianceStart <= applianceStop) {
+      const addedAppliance: Appliance = {
+        name: applianceName,
+        kwh: applianceKwh,
+        startTime: applianceStart,
+        endTime: applianceStop,
+      };
 
-    const homeCopy = {
-      ...home,
-      appliances: home.appliances
-        ? [...home.appliances, addedAppliance]
-        : [addedAppliance],
-    };
-    editHomeHandler(homeCopy);
-    console.log(homeCopy);
-    setAddAppliance(false);
+      const homeCopy = {
+        ...home,
+        appliances: home.appliances
+          ? [...home.appliances, addedAppliance]
+          : [addedAppliance],
+      };
+      editHomeHandler(homeCopy);
+      console.log(homeCopy);
+      setAddAppliance(false);
+    } else {
+      alert("Appliance stop time must be greater than appliance start time.");
+    }
+  };
+
+  const handleDefaultChange = (e: any) => {
+    let appKwh = defaultApplianceArray.find(
+      (item) => item.name === e.target.value
+    ).kwh;
+    setApplianceName(e.target.value);
+    setApplianceKwh(appKwh);
   };
 
   return (
@@ -42,11 +54,25 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
         <div className="popupContainer">
           <form onSubmit={(e) => handleSubmit(e)}>
             <p>Home: {home.name}</p>
+            <label htmlFor="defaultApplianceName"></label>
+            <select
+              name="defaultApplianceName"
+              value={applianceName}
+              onChange={handleDefaultChange}
+            >
+              <option>Select Your Appliance</option>
+              {defaultApplianceArray.map((item) => (
+                <option key={item.index} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
             <label htmlFor="applianceName">Appliance Name:</label>
             <input
               type="text"
               name="applianceName"
               id="applianceName"
+              placeholder={applianceName}
               value={applianceName}
               onChange={(e) => setApplianceName(e.target.value)}
             />
@@ -55,6 +81,8 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
               type="number"
               name="applianceKwh"
               id="applianceKwh"
+              required
+              min="0"
               value={applianceKwh}
               onChange={(e) => setApplianceKwh(Number(e.target.value))}
             />
@@ -63,9 +91,10 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
             </label>
             <input
               type="range"
+              // could have time scaled by 60 min (24 * 60), and step 1 min
               min={0}
               max={24}
-              step={1}
+              step={0.1}
               name="applianceStart"
               id="applianceStart"
               value={applianceStart}
@@ -80,7 +109,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
               type="range"
               min={0}
               max={24}
-              step={1}
+              step={0.1}
               name="applianceStop"
               id="applianceStop"
               value={applianceStop}

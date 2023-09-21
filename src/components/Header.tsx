@@ -17,7 +17,7 @@ const Header = () => {
           <p>Hello, {user?.displayName?.split(" ")[0]}!</p>
           <button onClick={signOut}>Sign Out</button>
           <Link to="/homes">
-            <p>See My Homes</p>
+            <p id="seeHomesButton">See My Homes</p>
           </Link>
         </div>
       ) : (

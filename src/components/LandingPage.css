@@ -6,3 +6,33 @@
     width: 70%;
   }
 }
+
+.LandingPage .signInButton {
+  height: 40px;
+}
+
+.LandingPage .circle {
+  border-radius: 50%;
+  border: 1px solid #007ba7;
+  background-color: #007ba7;
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  left: 1em;
+  /* animation-duration: 5s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; */
+}
+
+/* @keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+} */

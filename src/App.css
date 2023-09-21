@@ -7,3 +7,8 @@
 a {
   text-decoration: none;
 }
+
+.App,
+.App button {
+  font-family: "Prata", serif;
+}

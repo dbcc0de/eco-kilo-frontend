@@ -3,4 +3,5 @@ export default interface Appliance {
   kwh: number;
   startTime: number;
   endTime: number;
+  daysAWeek?: number;
 }

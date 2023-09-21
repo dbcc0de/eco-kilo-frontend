@@ -46,12 +46,15 @@ const LandingPage = () => {
             <HomesForm addHomeHandler={addHomeHandler} />
           </>
         ) : (
-          <>
+          <div>
             <p>Sign in to submit your home's data</p>
-            <button onClick={signInWithGoogle}>Sign in with Google</button>
-          </>
+            <button className="signInButton" onClick={signInWithGoogle}>
+              Sign in with Google
+            </button>
+          </div>
         )}
       </div>
+      <div className="circle"></div>
     </div>
   );
 };
