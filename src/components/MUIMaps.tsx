@@ -121,7 +121,7 @@ export default function GoogleMaps({ setCity, setState }: Props) {
   return (
     <Autocomplete
       id="google-map-demo"
-      sx={{ width: 300 }}
+      sx={{ width: "calc(100% - 0px)" }}
       getOptionLabel={(option) =>
         typeof option === "string" ? option : option.description
       }

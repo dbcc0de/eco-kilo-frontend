@@ -1,0 +1,9 @@
+.HomeList li {
+  list-style-type: none;
+  border: 2px black solid;
+  border-radius: 10px;
+}
+
+.HomeList {
+  padding: 5px;
+}

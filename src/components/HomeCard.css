@@ -1,0 +1,24 @@
+.HomeCard {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.HomeCard .buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.HomeCard .nestedButtonContainer {
+  display: flex;
+  height: 20px;
+  justify-content: center;
+}
+
+.HomeCard .viewMinApplianceButton {
+  position: relative;
+  bottom: 40px;
+  width: 80px;
+  left: 100px;
+}

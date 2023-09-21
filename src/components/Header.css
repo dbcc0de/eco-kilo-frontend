@@ -1,0 +1,23 @@
+.Header {
+  background-color: #007ba7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6em;
+}
+
+.Header h1 {
+  color: white;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.Header .userHeader,
+.Header p {
+  color: white;
+  margin-right: 10px;
+}
+
+.Header button {
+  margin-right: 10px;
+}

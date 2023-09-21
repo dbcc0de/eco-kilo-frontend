@@ -49,7 +49,9 @@ const HomesForm = ({ addHomeHandler }: Props) => {
         }}
       />
       <MUIMaps setCity={setCity} setState={setState} />
-      <button>Submit your home data</button>
+      <div className="formButton">
+        <button>Submit your home data</button>
+      </div>
       <div id="googlemaps-attribution-container"></div>
     </form>
   );

@@ -23,11 +23,11 @@ const HomeList = ({ homes, deleteHomeHandler, editHomeHandler }: Props) => {
             deleteHomeHandler={deleteHomeHandler}
             editHomeHandler={editHomeHandler}
           />
-          <ApplianceForm
+          {/* <ApplianceForm
             home={item}
             key={item._id! + index}
             editHomeHandler={editHomeHandler}
-          />
+          /> */}
         </div>
       ))}
     </ul>

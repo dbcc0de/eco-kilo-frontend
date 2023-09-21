@@ -13,13 +13,13 @@ const Header = () => {
         <h1>Eco Kilo</h1>
       </Link>
       {user ? (
-        <>
-          <button onClick={signOut}>Sign Out</button>
+        <div className="userHeader">
           <p>Hello, {user?.displayName?.split(" ")[0]}!</p>
+          <button onClick={signOut}>Sign Out</button>
           <Link to="/homes">
             <p>See My Homes</p>
           </Link>
-        </>
+        </div>
       ) : (
         <button onClick={signInWithGoogle}>Sign in with Google</button>
       )}

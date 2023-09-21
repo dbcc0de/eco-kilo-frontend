@@ -24,24 +24,34 @@ const LandingPage = () => {
 
   return (
     <div className="LandingPage">
-      <h2>Here's how Eco Kilo Works:</h2>
+      <h2>
+        Problem: I'm spending more on utilities. What is this new peak rate?
+      </h2>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea, sunt
-        incidunt labore molestiae blanditiis ad debitis, nihil nobis tempora
-        reprehenderit deserunt vero consectetur iste esse. Sapiente consectetur
-        cumque quisquam.
+        Utilities such as DTE and Consumers have introduced "Peak Rates" during
+        the afternoon to the evening. Energy is the most expensive to buy from
+        the grid at those times, so you may be paying more.
       </p>
-      {/* link to user form that inputs homes data */}
-      {user ? (
-        <>
-          <HomesForm addHomeHandler={addHomeHandler} />
-        </>
-      ) : (
-        <>
-          <p>Sign in to submit your home's data</p>
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
-        </>
-      )}
+      <h2>Learn how you can save more with Eco Kilo:</h2>
+      <div className="landingFlex">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea,
+          sunt incidunt labore molestiae blanditiis ad debitis, nihil nobis
+          tempora reprehenderit deserunt vero consectetur iste esse. Sapiente
+          consectetur cumque quisquam.
+        </p>
+        {/* link to user form that inputs homes data */}
+        {user ? (
+          <>
+            <HomesForm addHomeHandler={addHomeHandler} />
+          </>
+        ) : (
+          <>
+            <p>Sign in to submit your home's data</p>
+            <button onClick={signInWithGoogle}>Sign in with Google</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
