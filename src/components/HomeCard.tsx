@@ -217,7 +217,10 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
                     </button>
                   </li>
                 ))}
-                <button onClick={() => setCollapse(false)}>
+                <button
+                  className="minimizeAppliancesButton"
+                  onClick={() => setCollapse(false)}
+                >
                   Minimize Appliances
                 </button>
               </ul>

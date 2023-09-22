@@ -3,6 +3,7 @@ import Home from "../models/Home";
 import { getUtilityRates } from "../services/utilityRatesService";
 import "./EnergyResults.css";
 import UtilityResponse from "../models/UtilityResponse";
+import ResultsChart from "./ResultsChart";
 
 interface Props {
   home: Home;
@@ -10,8 +11,9 @@ interface Props {
 }
 
 const EnergyResults = ({ home, setShowResults }: Props) => {
-  let [offPeakCostCounter, setOffPeakCostCounter] = useState(0);
-  let [peakCostCounter, setPeakCostCounter] = useState(0);
+  const [offPeakCostCounter, setOffPeakCostCounter] = useState(0);
+  const [peakCostCounter, setPeakCostCounter] = useState(0);
+  // const [] = useState();
   const [utilityResponse, setUtilityResponse] =
     useState<UtilityResponse | null>(null);
   useEffect(() => {
@@ -19,68 +21,25 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
       await setUtilityResponse(await getUtilityRates(home.lat, home.lon));
     })();
   }, []);
-
-  // to calculate peak rates and off peak rates, take an appliance end and starttime and decipher if within or outside of peak hours
-  // peak hours = 15 - 19
-  // off peak hours = 0 - 15, 19 - 24
-  // what if an appliance spans both? need to calculate differently
-
-  let utilityRate = utilityResponse?.outputs.residential || 0.1611;
-
-  if (
-    utilityResponse?.outputs.utility_name === "Detroit Public Lighting" ||
-    utilityResponse?.outputs.utility_name === "Detroit Edison Co (The)"
-  ) {
-    utilityRate = 0.1545;
-  }
-
-  const peakAndOffPeakCalculation = (home: Home): void => {
-    if (home.appliances) {
-      setPeakCostCounter(0);
-      setOffPeakCostCounter(0);
-      home.appliances.map((item) => {
-        if (item.endTime <= 19 && item.startTime >= 15) {
-          console.log("This appliance is only using peak hours.");
-          const kwhPerDay: number = item.kwh * (item.endTime - item.startTime);
-          const costPerDay: number =
-            Number(
-              kwhPerDay * (utilityResponse?.outputs.residential || 0.1611)
-            ) * 1.64;
-          setPeakCostCounter((prev) => (prev += costPerDay));
-          console.log(peakCostCounter);
-        } else if (item.endTime > 15 && item.startTime < 19) {
-          console.log("Uses peak and off peak hours");
-          //  TV starts at 1 and goes until 10
-          //  1-3 is off peak, 3-7 is peak, 7-10 is off peak
-          // TV begins at 13, ends at 22
-          // 15 - 19 peak hours
-          // 15 - 13 = 2 hours before peak
-          //   22 - 19 = 3 hours after peak
-          //  peak hours = end time - start time - hours before peak - hours after peak
-
-          // setpeakCostCounter((peakCostCounter += costPerDay));
-        } else if (
-          item.endTime < 15 ||
-          item.endTime > 19 ||
-          item.startTime < 15 ||
-          item.startTime > 19
-        ) {
-          console.log("This appliance uses off peak hours");
-          const kwhPerDay: number = item.kwh * (item.endTime - item.startTime);
-          const costPerDay: number = Number(
-            kwhPerDay * (utilityResponse?.outputs.residential || 0.1611)
-          );
-          setOffPeakCostCounter((prev) => (prev += costPerDay));
-        }
-      });
-    }
-  };
+  let [utilityRate, setUtilityRate] = useState(
+    utilityResponse?.outputs.residential || 0.1611
+  );
+  // moved utilityRate to state variable
+  // let utilityRate = utilityResponse?.outputs.residential || 0.1611;
 
   const calculateAllHours = (home: Home): void => {
+    if (
+      utilityResponse?.outputs.utility_name === "Detroit Public Lighting" ||
+      utilityResponse?.outputs.utility_name === "Detroit Edison Co (The)"
+    ) {
+      setUtilityRate(0.1545);
+    }
     const peakStart = 15;
     const peakEnd = 19;
     setPeakCostCounter(0);
     setOffPeakCostCounter(0);
+    console.log(home);
+    console.log(home.appliances);
     if (home.appliances) {
       home.appliances.map((item) => {
         let beforePeak: number | null = null;
@@ -92,6 +51,7 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
             setOffPeakCostCounter(
               (prev) => (prev += Number(offPeakBeforePeak))
             );
+            console.log(beforePeak);
           } else {
             beforePeak = peakStart - item.startTime;
             const offPeakIncludePeak =
@@ -130,6 +90,8 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
           }
         }
       });
+    } else {
+      alert("Enter an appliance to calculate your costs");
     }
   };
 
@@ -152,33 +114,61 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
   };
 
   return (
-    <div className="EnergyResults">
-      <p>Your Utility Company is: {utilityResponse?.outputs.utility_name}</p>
-      <p>Your utility rate is: {utilityRate} cents per kilowatt hour. </p>
-      <p>
-        You peak utility rate is: {((utilityRate || 0.1611) * 1.37).toFixed(4)}{" "}
-        cents per kilowatt hour.
-      </p>
-      {peakCostCounter ? (
-        <>
-          {" "}
-          <p>Peak rate costs per day: ${peakCostCounter.toFixed(2)} </p>
-          <p>Off peak rate costs per day: ${offPeakCostCounter.toFixed(2)} </p>
-          <p>
-            Total costs per day: $
-            {(offPeakCostCounter + peakCostCounter).toFixed(2)}
-          </p>
-        </>
-      ) : (
-        <p>Press Calculate to see your costs</p>
-      )}
+    <>
+      <div className="EnergyResults">
+        <p>Your Utility Company is: {utilityResponse?.outputs.utility_name}</p>
+        <p>Your utility rate is: {utilityRate} cents per kilowatt hour. </p>
+        <p>
+          You peak utility rate is:{" "}
+          {((utilityRate || 0.1611) * 1.37).toFixed(4)} cents per kilowatt hour.
+        </p>
+        {peakCostCounter ? (
+          <>
+            {" "}
+            <p>Peak rate costs per day: ${peakCostCounter.toFixed(2)} </p>
+            <p>
+              Off peak rate costs per day: ${offPeakCostCounter.toFixed(2)}{" "}
+            </p>
+            <p>
+              Total costs per day: $
+              {(offPeakCostCounter + peakCostCounter).toFixed(2)}
+            </p>
+          </>
+        ) : (
+          <p>Press Calculate to see your costs</p>
+        )}
 
-      {/* add utility rate */}
-      {/* add average utility rate and bill */}
-      {/* suggest improvements  */}
-      <button onClick={() => calculateAllHours(home)}>Calculate Costs</button>
-      <button onClick={() => setShowResults(false)}>Exit</button>
-    </div>
+        {/* add utility rate */}
+        {/* add average utility rate and bill */}
+        {/* suggest improvements  */}
+
+        <button onClick={() => calculateAllHours(home)}>Calculate Costs</button>
+        <button onClick={() => setShowResults(false)}>Exit</button>
+        <p>What if my costs changed?</p>
+        <div>
+          <button onClick={() => setPeakCostCounter((prev) => prev - 0.25)}>
+            -
+          </button>
+          <p style={{ display: "inline" }}>Adjust Peak Costs</p>
+          <button onClick={() => setPeakCostCounter((prev) => prev + 0.25)}>
+            +
+          </button>
+        </div>
+        <div>
+          <button onClick={() => setOffPeakCostCounter((prev) => prev - 0.25)}>
+            -
+          </button>
+          <p style={{ display: "inline" }}>Adjust Off Peak Costs</p>
+          <button onClick={() => setPeakCostCounter((prev) => prev + 0.25)}>
+            +
+          </button>
+        </div>
+      </div>
+      <ResultsChart
+        peakCostCounter={peakCostCounter}
+        offPeakCostCounter={offPeakCostCounter}
+      />
+    </>
   );
 };
 

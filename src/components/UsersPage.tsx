@@ -52,7 +52,7 @@ const UsersPage = () => {
           />
         </>
       ) : (
-        <p>Here is loading screen</p>
+        <p>Loading Homes...</p>
       )}
       <HomesForm addHomeHandler={addHomeHandler} />
     </div>
