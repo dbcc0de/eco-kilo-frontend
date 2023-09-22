@@ -11,7 +11,7 @@ interface Props {
 
 const ApplianceForm = ({ home, editHomeHandler }: Props) => {
   const [applianceName, setApplianceName] = useState("");
-  const [applianceKwh, setApplianceKwh] = useState(0);
+  const [applianceKwh, setApplianceKwh] = useState("");
   const [applianceStart, setApplianceStart] = useState(0);
   const [applianceStop, setApplianceStop] = useState(0);
   const [addAppliance, setAddAppliance] = useState(false);
@@ -21,7 +21,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
     if (applianceStart <= applianceStop) {
       const addedAppliance: Appliance = {
         name: applianceName,
-        kwh: applianceKwh,
+        kwh: Number(applianceKwh),
         startTime: applianceStart,
         endTime: applianceStop,
       };
@@ -81,10 +81,10 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
               type="number"
               name="applianceKwh"
               id="applianceKwh"
-              required
-              min="0"
+              min={0}
+              step={0.1}
               value={applianceKwh}
-              onChange={(e) => setApplianceKwh(Number(e.target.value))}
+              onChange={(e) => setApplianceKwh(e.target.value)}
             />
             <label htmlFor="applianceStart">
               Appliance Start to Stop Time:

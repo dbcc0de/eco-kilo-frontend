@@ -194,7 +194,7 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <p>City: {home.city}</p>
           <p>State: {home.state}</p>
 
-          <p>Appliances: {home.appliances?.length} </p>
+          <p>Appliances: {home.appliances?.length || 0} </p>
           <div className="buttonContainer">
             {!collapse ? (
               <button
