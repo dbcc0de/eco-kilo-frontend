@@ -12,6 +12,9 @@ const Header = () => {
       <Link to="/">
         <h1>Eco Kilo</h1>
       </Link>
+      <Link to="/education">
+        <h2>Education</h2>
+      </Link>
       {user ? (
         <div className="userHeader">
           <p>Hello, {user?.displayName?.split(" ")[0]}!</p>
