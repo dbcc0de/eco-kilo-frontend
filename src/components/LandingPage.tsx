@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import Home from "../models/Home";
 import { addHome, getHomes } from "../services/homeService";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -40,6 +41,9 @@ const LandingPage = () => {
           tempora reprehenderit deserunt vero consectetur iste esse. Sapiente
           consectetur cumque quisquam.
         </p>
+        <Link to="/education">
+          <button>Education Page</button>
+        </Link>
         {/* link to user form that inputs homes data */}
         {user ? (
           <>

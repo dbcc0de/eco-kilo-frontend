@@ -6,7 +6,8 @@
   height: 7em;
 }
 
-.Header h1 {
+.Header h1,
+.Header h2 {
   color: white;
   margin-left: 10px;
   text-decoration: none;
