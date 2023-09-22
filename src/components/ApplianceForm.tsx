@@ -82,7 +82,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
               name="applianceKwh"
               id="applianceKwh"
               min={0}
-              step={0.1}
+              step={0.01}
               value={applianceKwh}
               onChange={(e) => setApplianceKwh(e.target.value)}
             />
@@ -120,7 +120,12 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
           </form>
         </div>
       ) : (
-        <button onClick={() => setAddAppliance(true)}>Add Appliance</button>
+        <button
+          className="addApplianceButton"
+          onClick={() => setAddAppliance(true)}
+        >
+          Add Appliance
+        </button>
       )}
     </div>
   );

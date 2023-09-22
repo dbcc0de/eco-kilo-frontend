@@ -5,6 +5,7 @@ import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import Home from "../models/Home";
 import { addHome, getHomes } from "../services/homeService";
+import PeakVisualChart from "./PeakVisualChart";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -55,6 +56,7 @@ const LandingPage = () => {
         )}
       </div>
       <div className="circle"></div>
+      <PeakVisualChart />
     </div>
   );
 };
