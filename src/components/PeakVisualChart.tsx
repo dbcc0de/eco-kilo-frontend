@@ -1,5 +1,5 @@
 import "./PeakVisualChart.css";
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const PeakVisualChart = () => {
   const RADIAN = Math.PI / 180;
@@ -51,7 +51,7 @@ const PeakVisualChart = () => {
     ];
   };
   return (
-    <PieChart width={400} height={500}>
+    <PieChart className="peakPieChart" width={300} height={300}>
       <Pie
         dataKey="value"
         startAngle={180}

@@ -4,8 +4,17 @@
   border-radius: 10px;
   background-color: #046307;
   color: white;
+  width: 46vh;
 }
 
 .HomeList {
   padding: 5px;
+  display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+  .HomeList {
+    display: flex;
+    flex-direction: column;
+  }
 }

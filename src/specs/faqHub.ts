@@ -31,6 +31,11 @@ const allFaqs: Faq[] = [
     answer:
       "An average off-peak hourly rate is 15.45¢ per kWh. Conversely, an average peak hourly rate during the warmer summer months of June-September have an average of 20.98¢ per kWh while the cooler months of October-May have an average peak hourly rate of 16.75¢ per kWh.",
   },
+  {
+    question: "Why Eco Kilo?",
+    answer:
+      "Eco comes from the Greek, οἶκος (oikos), or household, and kilo from the Greek, χίλιοι (khelioi), or one thousand. What if one thousand households had more money in their pockets?",
+  },
 ];
 
 export default allFaqs;

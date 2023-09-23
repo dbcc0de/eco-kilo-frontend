@@ -159,7 +159,7 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
             -
           </button>
           <p style={{ display: "inline" }}>Adjust Off Peak Costs</p>
-          <button onClick={() => setPeakCostCounter((prev) => prev + 0.25)}>
+          <button onClick={() => setOffPeakCostCounter((prev) => prev + 0.25)}>
             +
           </button>
         </div>

@@ -193,58 +193,59 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <p>Home: {home.name}</p>
           <p>City: {home.city}</p>
           <p>State: {home.state}</p>
-
           <p>Appliances: {home.appliances?.length || 0} </p>
+          {!collapse && home.appliances?.length ? (
+            <button
+              className="viewMinApplianceButton"
+              onClick={() => setCollapse(true)}
+            >
+              View
+            </button>
+          ) : (
+            <ul>
+              {home.appliances?.map((item, index) => (
+                <li key={item.name + index}>
+                  <p>Name: {item.name}</p>
+                  <p>kWh: {item.kwh}</p>
+                  <p>Start Time: {item.startTime}</p>
+                  <p>End Time: {item.endTime}</p>
+                  <button onClick={() => handleRemoveAppliance(index)}>
+                    Remove Appliance
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          {collapse ? (
+            <button
+              className="minimizeAppliancesButton"
+              onClick={() => setCollapse(false)}
+            >
+              Minimize Appliances
+            </button>
+          ) : (
+            <></>
+          )}
+          <ApplianceForm home={home} editHomeHandler={editHomeHandler} />
+
           <div className="buttonContainer">
-            {!collapse ? (
+            <button onClick={() => setOpenToEdit(true)}>Edit</button>
+            <button onClick={() => deleteHomeHandler(home._id!)}>
+              Delete Home
+            </button>
+
+            {!showResults ? (
               <button
-                className="viewMinApplianceButton"
-                onClick={() => setCollapse(true)}
+                className="viewEnergyButton"
+                onClick={() => setShowResults(true)}
               >
-                View Appliances
+                View My Energy Data
               </button>
             ) : (
-              <ul>
-                {home.appliances?.map((item, index) => (
-                  <li key={item.name + index}>
-                    <p>Name: {item.name}</p>
-                    <p>kWh: {item.kwh}</p>
-                    <p>Start Time: {item.startTime}</p>
-                    <p>End Time: {item.endTime}</p>
-                    {/* Splice out the appliance at index y */}
-                    <button onClick={() => handleRemoveAppliance(index)}>
-                      Remove Appliance
-                    </button>
-                  </li>
-                ))}
-                <button
-                  className="minimizeAppliancesButton"
-                  onClick={() => setCollapse(false)}
-                >
-                  Minimize Appliances
-                </button>
-              </ul>
+              <div className="popupContainer">
+                <EnergyResults setShowResults={setShowResults} home={home} />
+              </div>
             )}
-            <div className="nestedButtonContainer">
-              <ApplianceForm home={home} editHomeHandler={editHomeHandler} />
-              <button onClick={() => setOpenToEdit(true)}>Edit</button>
-              <button onClick={() => deleteHomeHandler(home._id!)}>
-                Delete Home
-              </button>
-
-              {!showResults ? (
-                <button
-                  className="viewEnergyButton"
-                  onClick={() => setShowResults(true)}
-                >
-                  View My Energy Data
-                </button>
-              ) : (
-                <div className="popupContainer">
-                  <EnergyResults setShowResults={setShowResults} home={home} />
-                </div>
-              )}
-            </div>
           </div>
         </>
       )}

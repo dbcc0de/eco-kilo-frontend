@@ -6,5 +6,7 @@
 }
 
 .ApplianceForm button {
-  display: block;
+  position: relative;
+  bottom: 1em;
+  border: 2px solid white;
 }

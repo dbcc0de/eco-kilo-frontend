@@ -124,7 +124,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
           className="addApplianceButton"
           onClick={() => setAddAppliance(true)}
         >
-          Add Appliance
+          +
         </button>
       )}
     </div>

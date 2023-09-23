@@ -3,13 +3,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 7em;
+  height: 10em;
+}
+
+.Header #titleWhite {
+  width: 200px;
+  height: auto;
 }
 
 .Header h1,
 .Header h2 {
   color: white;
-  margin-left: 10px;
+  margin-left: 20px;
   text-decoration: none;
   font-family: "Rosarivo", serif;
 }
@@ -30,4 +35,13 @@
 .Header #seeHomesButton {
   border: 1px solid white;
   padding: 3px;
+}
+
+.Header #logoLetters {
+  width: 5em;
+  height: 10em;
+}
+.Header #logoWords {
+  width: 5em;
+  height: 10em;
 }

@@ -11,28 +11,46 @@
   height: 40px;
 }
 
-.LandingPage .circle {
+.LandingPage #peakVisualContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LandingPage #pieVisualIntro {
+  position: absolute;
+  top: 17em;
+}
+
+.LandingPage span {
+  font-weight: bold;
+}
+
+.LandingPage .blueCircle {
   border-radius: 50%;
   border: 1px solid #007ba7;
   background-color: #007ba7;
   height: 150px;
   width: 150px;
   position: absolute;
-  left: 1em;
-  /* animation-duration: 5s;
-  animation-name: slidein;
-  animation-iteration-count: infinite;
-  animation-direction: alternate; */
+}
+.LandingPage .whiteCircle {
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  height: 130px;
+  width: 130px;
+  position: absolute;
 }
 
-/* @keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
+.LandingPage #logoWords {
+  width: 3em;
+  height: 8em;
+  position: relative;
+  left: 3em;
+}
 
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-} */
+.LandingPage .logoAndMeterContainer {
+  display: flex;
+}

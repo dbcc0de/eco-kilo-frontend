@@ -16,19 +16,12 @@ const HomeList = ({ homes, deleteHomeHandler, editHomeHandler }: Props) => {
   return (
     <ul className="HomeList">
       {homes.map((item, index) => (
-        <div key={index}>
-          <HomeCard
-            home={item}
-            key={item._id}
-            deleteHomeHandler={deleteHomeHandler}
-            editHomeHandler={editHomeHandler}
-          />
-          {/* <ApplianceForm
-            home={item}
-            key={item._id! + index}
-            editHomeHandler={editHomeHandler}
-          /> */}
-        </div>
+        <HomeCard
+          home={item}
+          key={item._id}
+          deleteHomeHandler={deleteHomeHandler}
+          editHomeHandler={editHomeHandler}
+        />
       ))}
     </ul>
   );

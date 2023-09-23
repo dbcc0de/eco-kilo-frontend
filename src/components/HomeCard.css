@@ -23,25 +23,36 @@
   border: 4px solid #007ba7;
 }
 
-.HomeCard .nestedButtonContainer {
+.HomeCard .applianceButtonsContainer {
   display: flex;
-  justify-content: center;
-  justify-content: space-evenly;
-  margin-top: 10px;
 }
 
 .HomeCard .viewMinApplianceButton {
   position: relative;
   z-index: 0;
   bottom: 3em;
-  width: 10em;
+  width: 7em;
   left: 9em;
 }
 
 .HomeCard .minimizeAppliancesButton {
-  margin-top: 10px;
-  position: relative;
-  left: -1em;
+  margin-bottom: 10px;
+}
+
+.HomeCard ul {
+  padding: 0;
+  width: 40vw;
+  z-index: 2;
+  /* display: flex */
+  /* flex-direction: row */
+  /* flex-wrap: wrap */
+}
+
+.HomeCard ul li {
+  background-color: #20cd26;
+  color: black;
+  width: 20vw;
+  min-width: 200px;
 }
 
 .HomeCard .popupContainer {

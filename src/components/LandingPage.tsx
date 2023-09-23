@@ -7,6 +7,8 @@ import Home from "../models/Home";
 import { addHome, getHomes } from "../services/homeService";
 import PeakVisualChart from "./PeakVisualChart";
 import { Link } from "react-router-dom";
+import logoWords from "../assets/logoWords.png";
+import streetLight from "../assets/streetlightSilo.png";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -29,6 +31,13 @@ const LandingPage = () => {
       <h2>
         Problem: I'm spending more on utilities. What is this new peak rate?
       </h2>
+      <section id="peakVisualContainer">
+        <p id="pieVisualIntro">
+          Energy is nearly <span>30% more</span> expensive at peak hours!
+        </p>
+        <PeakVisualChart />
+        <p>Peak Hours Between 3pm - 7pm</p>
+      </section>
       <p>
         Utilities such as DTE and Consumers have introduced "Peak Rates" during
         the afternoon to the evening. Energy is the most expensive to buy from
@@ -39,28 +48,38 @@ const LandingPage = () => {
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea,
           sunt incidunt labore molestiae blanditiis ad debitis, nihil nobis
-          tempora reprehenderit deserunt vero consectetur iste esse. Sapiente
-          consectetur cumque quisquam.
+          tempora reprehenderit.
+          {/* <Link to="/education">
+            <button>Education Page</button>
+          </Link> */}
         </p>
-        <Link to="/education">
-          <button>Education Page</button>
-        </Link>
+
         {/* link to user form that inputs homes data */}
-        {user ? (
-          <>
-            <HomesForm addHomeHandler={addHomeHandler} />
-          </>
-        ) : (
-          <div>
-            <p>Sign in to submit your home's data</p>
-            <button className="signInButton" onClick={signInWithGoogle}>
-              Sign in with Google
-            </button>
-          </div>
-        )}
       </div>
-      <div className="circle"></div>
-      <PeakVisualChart />
+
+      {user ? (
+        <>
+          <HomesForm addHomeHandler={addHomeHandler} />
+        </>
+      ) : (
+        <div>
+          <p>Sign in to submit your home's data</p>
+          <button className="signInButton" onClick={signInWithGoogle}>
+            Sign in with Google
+          </button>
+        </div>
+      )}
+      <div className="logoAndMeterContainer">
+        <div className="blueCircle">
+          <div className="whiteCircle">
+            <img
+              id="logoWords"
+              src={logoWords}
+              alt="thunderbolt logo with words eco kilo"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
