@@ -1,0 +1,25 @@
+.SampleApplianceForm {
+  background-color: #007ba7;
+  color: white;
+  border: 2px solid white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  padding: 10px;
+}
+
+#formAndShowDataContainer {
+  display: flex;
+}
+
+.SampleApplianceForm #radioContainer {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .SampleApplianceForm #radioContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

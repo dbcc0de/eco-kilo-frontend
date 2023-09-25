@@ -1,26 +1,20 @@
-@media only screen and (min-width: 600px) {
-  .LandingPage .landingFlex {
-    display: flex;
-  }
-  .LandingPage .landingFlex p {
-    width: 70%;
-  }
+.LandingPage h2,
+.LandingPage h3 {
+  text-align: center;
 }
 
 .LandingPage .signInButton {
   height: 40px;
 }
 
-.LandingPage #peakVisualContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.LandingPage #pieChartIntro p {
+  margin: 0;
 }
 
-.LandingPage #pieVisualIntro {
-  position: absolute;
-  top: 17em;
+.LandingPage #peakVisualContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .LandingPage span {
@@ -53,4 +47,11 @@
 
 .LandingPage .logoAndMeterContainer {
   display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .LandingPage #peakVisualContainer {
+    display: flex;
+    flex-direction: column;
+  }
 }
