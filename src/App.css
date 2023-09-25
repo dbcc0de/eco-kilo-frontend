@@ -9,7 +9,11 @@ a {
 }
 
 .App,
-.App button {
+.App button,
+.App form,
+.App label,
+.App input,
+.App select {
   font-family: "Prata", serif;
 }
 
