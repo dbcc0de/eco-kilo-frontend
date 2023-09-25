@@ -12,3 +12,7 @@ a {
 .App button {
   font-family: "Prata", serif;
 }
+
+.App ul {
+  list-style-type: none;
+}
