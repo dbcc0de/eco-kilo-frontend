@@ -9,6 +9,7 @@ import PeakVisualChart from "./PeakVisualChart";
 import { Link } from "react-router-dom";
 import logoWords from "../assets/logoWords.png";
 import streetLight from "../assets/streetlightSilo.png";
+import wires from "../assets/wiresDefault.png";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -27,7 +28,14 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="LandingPage">
+    <div
+      className="LandingPage"
+      style={{
+        backgroundImage: `url(${wires})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "right",
+      }}
+    >
       <h2>
         Problem: I'm spending more on utilities. What is this new peak rate?
       </h2>

@@ -2,12 +2,16 @@
   padding: 5px;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 5px;
 }
 
 .HomeCard form {
   color: white;
   background-color: #046307;
+}
+
+.HomeCard #appliancesLabel {
+  margin-bottom: 0;
 }
 
 .HomeCard .buttonContainer {
@@ -30,8 +34,8 @@
 .HomeCard .viewMinApplianceButton {
   position: relative;
   z-index: 0;
-  bottom: 3em;
-  width: 7em;
+  bottom: 2em;
+  width: 5em;
   left: 9em;
 }
 

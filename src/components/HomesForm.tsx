@@ -48,7 +48,11 @@ const HomesForm = ({ addHomeHandler }: Props) => {
           setHomeName(e.target.value);
         }}
       />
-      <MUIMaps setCity={setCity} setState={setState} />
+      <label htmlFor="setLocation">
+        Enter City and State:
+        <MUIMaps setCity={setCity} setState={setState} />
+      </label>
+
       <div className="formButton">
         <button>Submit your home data</button>
       </div>

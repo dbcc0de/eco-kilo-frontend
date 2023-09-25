@@ -193,7 +193,9 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <p>Home: {home.name}</p>
           <p>City: {home.city}</p>
           <p>State: {home.state}</p>
-          <p>Appliances: {home.appliances?.length || 0} </p>
+          <p id="appliancesLabel">
+            Appliances: {home.appliances?.length || 0}{" "}
+          </p>
           {!collapse && home.appliances?.length ? (
             <button
               className="viewMinApplianceButton"
