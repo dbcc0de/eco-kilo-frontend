@@ -1,0 +1,16 @@
+.FaqCard p {
+  margin: 0;
+}
+
+.FaqCard #faqQuestion {
+  background-color: lightgray;
+  margin-top: 0;
+}
+
+.FaqCard li {
+  display: flex;
+}
+
+.FaqCard #CardContainer {
+  display: flex;
+}

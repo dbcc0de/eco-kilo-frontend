@@ -16,3 +16,7 @@ a {
 .App select {
   font-family: "Prata", serif;
 }
+
+.App ul {
+  list-style-type: none;
+}

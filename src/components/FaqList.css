@@ -1,0 +1,10 @@
+.FaqList ul #faqs {
+  padding-left: 0;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .FaqCard li {
+  padding-left: 0;
+} */
