@@ -41,11 +41,15 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
   };
 
   const handleDefaultChange = (e: any) => {
-    let appKwh = defaultApplianceArray.find(
-      (item) => item.name === e.target.value
-    ).kwh;
-    setApplianceName(e.target.value);
-    setApplianceKwh(appKwh);
+    if (e.target.value === "Select Your Appliance") {
+      setApplianceKwh("");
+    } else {
+      let appKwh = defaultApplianceArray.find(
+        (item) => item.name === e.target.value
+      ).kwh;
+      setApplianceName(e.target.value);
+      setApplianceKwh(appKwh);
+    }
   };
 
   return (

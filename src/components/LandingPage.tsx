@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import logoWords from "../assets/logoWords.png";
 import streetLight from "../assets/streetlightSilo.png";
 import wires from "../assets/wiresDefault.png";
+import SampleApplianceForm from "./SampleApplianceForm";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -33,36 +34,67 @@ const LandingPage = () => {
       style={{
         backgroundImage: `url(${wires})`,
         backgroundRepeat: "no-repeat",
-        backgroundPosition: "right",
+        backgroundPosition: "right bottom",
       }}
     >
       <h2>
-        Problem: I'm spending more on utilities. What is this new peak rate?
+        Is your utility company raising rates at peak hours? Do you know how
+        much that could cost you?
       </h2>
+      <h3>
+        Some utilities, including DTE and Consumers, have introduced "Time of
+        Day" rates that mean you pay more when energy is most expensive — at
+        peak hours!
+      </h3>
       <section id="peakVisualContainer">
-        <p id="pieVisualIntro">
-          Energy is nearly <span>30% more</span> expensive at peak hours!
-        </p>
-        <PeakVisualChart />
-        <p>Peak Hours Between 3pm - 7pm</p>
+        <div id="pieChartIntro">
+          <p>
+            Energy is nearly <span>30% more</span> expensive at peak hours!
+          </p>
+          <PeakVisualChart />
+          <p>Peak Hours Between 3pm - 7pm</p>
+        </div>
+        <div>
+          <h4>
+            DTE Peak Rates are from <span>3pm - 7pm</span>
+          </h4>
+          <p>
+            During the Summer Months (June 1st - September 30th) off-peak rate
+            is $0.1545 cents per kWh and on-peak rate is $0.2098 cents per kwh.
+            (What's that?) That means it costs 35.8% more to use electricity
+            during peak summer hours.{" "}
+          </p>
+          <p>
+            From October 1st - May 31st you will pay an off-peak rate of $0.1545
+            cents per kWh and an on-peak rate of $0.1675 cents per kWh. It's not
+            as much as the summer peak rate but it's still 8.4% more expensive
+            to use electricity during peak hours.{" "}
+          </p>
+          <h4>
+            Consumers Peak Rates are from <span>2pm - 7pm</span>
+          </h4>
+          <p>
+            During the Summer Months (June 1st - September 30th) off-peak rate
+            is $0.167 cents per kWh and on-peak rate is $0.223 cents per kwh.
+            (What's that?) That means it costs 33.5% more to run an appliance
+            during peak hours.{" "}
+          </p>
+          <p>
+            From October 1st - May 31st you will pay an off-peak rate of $0.157
+            cents per kWh and an on-peak rate of $0.17 cents per kWh. It's not
+            as much as the summer peak rate but it's still 8.3% more expensive
+            to use electricity during peak hours.{" "}
+          </p>
+        </div>
       </section>
-      <p>
-        Utilities such as DTE and Consumers have introduced "Peak Rates" during
-        the afternoon to the evening. Energy is the most expensive to buy from
-        the grid at those times, so you may be paying more.
-      </p>
-      <h2>Learn how you can save more with Eco Kilo:</h2>
-      <div className="landingFlex">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ea,
-          sunt incidunt labore molestiae blanditiis ad debitis, nihil nobis
-          tempora reprehenderit.
-          {/* <Link to="/education">
-            <button>Education Page</button>
-          </Link> */}
-        </p>
-
-        {/* link to user form that inputs homes data */}
+      <h2>
+        How much money could I save if I ran an appliance during off-peak hours
+        instead? Use the form below to find out!
+      </h2>
+      <div className="sampleRateFormContainer">
+        <h3>Try Our Sample Appliance Form</h3>
+        <p>(it will enter the standard kwh for the average appliance)</p>
+        <SampleApplianceForm />
       </div>
 
       {user ? (
