@@ -17,6 +17,33 @@
   align-items: center;
 }
 
+.LandingPage #dtePie {
+  width: 50vw;
+}
+
+.LandingPage #utilityCardContainer h4 {
+  text-align: center;
+}
+
+.LandingPage .card {
+  border: 2px solid #541248;
+  border-radius: 4px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 300ms;
+  cursor: pointer;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0))
+    translateY(var(--translate-y, 0));
+}
+
+.LandingPage .flip {
+  --rotate-y: 180deg;
+}
+
+.LandingPage .card .back {
+  transform: rotateY(180deg);
+}
+
 .LandingPage span {
   font-weight: bold;
 }
@@ -61,5 +88,9 @@
   .LandingPage #peakVisualContainer {
     display: flex;
     flex-direction: column;
+  }
+
+  .LandingPage #dtePie {
+    width: 80vw;
   }
 }

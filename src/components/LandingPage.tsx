@@ -5,16 +5,15 @@ import AuthContext from "../context/AuthContext";
 import { signInWithGoogle } from "../firebaseConfig";
 import Home from "../models/Home";
 import { addHome, getHomes } from "../services/homeService";
-import PeakVisualChart from "./PeakVisualChart";
-import { Link } from "react-router-dom";
 import logoWords from "../assets/logoWords.png";
-import streetLight from "../assets/streetlightSilo.png";
 import wires from "../assets/wiresDefault.png";
+import dtePie from "../assets/dtePie.png";
 import SampleApplianceForm from "./SampleApplianceForm";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
   const [homes, setHomes] = useState<Home[]>([]);
+  const [flipCard, setFlipCard] = useState(false);
 
   const loadUserHomesHandler = async (): Promise<void> => {
     setHomes(await getHomes(user?.uid!));
@@ -51,40 +50,58 @@ const LandingPage = () => {
           <p>
             Energy is nearly <span>30% more</span> expensive at peak hours!
           </p>
-          <PeakVisualChart />
+          <img src={dtePie} id="dtePie"></img>
           <p>Peak Hours Between 3pm - 7pm</p>
         </div>
-        <div>
-          <h4>
-            DTE Peak Rates are from <span>3pm - 7pm</span>
-          </h4>
-          <p>
-            During the Summer Months (June 1st - September 30th) off-peak rate
-            is $0.1545 cents per kWh and on-peak rate is $0.2098 cents per kwh.
-            (What's that?) That means it costs 35.8% more to use electricity
-            during peak summer hours.{" "}
-          </p>
-          <p>
-            From October 1st - May 31st you will pay an off-peak rate of $0.1545
-            cents per kWh and an on-peak rate of $0.1675 cents per kWh. It's not
-            as much as the summer peak rate but it's still 8.4% more expensive
-            to use electricity during peak hours.{" "}
-          </p>
-          <h4>
-            Consumers Peak Rates are from <span>2pm - 7pm</span>
-          </h4>
-          <p>
-            During the Summer Months (June 1st - September 30th) off-peak rate
-            is $0.167 cents per kWh and on-peak rate is $0.223 cents per kwh.
-            (What's that?) That means it costs 33.5% more to run an appliance
-            during peak hours.{" "}
-          </p>
-          <p>
-            From October 1st - May 31st you will pay an off-peak rate of $0.157
-            cents per kWh and an on-peak rate of $0.17 cents per kWh. It's not
-            as much as the summer peak rate but it's still 8.3% more expensive
-            to use electricity during peak hours.{" "}
-          </p>
+        <div
+          id="utilityCardContainer"
+          className={`card ${flipCard ? "flip" : ""}`}
+        >
+          {!flipCard ? (
+            <div
+              id="dteCardContainer"
+              className="front"
+              onClick={(e) => setFlipCard(true)}
+            >
+              <h4>
+                DTE Peak Rates are from <span>3pm - 7pm</span>
+              </h4>
+              <p>
+                During the Summer Months (June 1st - September 30th) off-peak
+                rate is $0.1545 cents per kWh and on-peak rate is $0.2098 cents
+                per kwh. That means it costs 35.8% more to use electricity
+                during peak summer hours.{" "}
+              </p>
+              <p>
+                From October 1st - May 31st you will pay an off-peak rate of
+                $0.1545 cents per kWh and an on-peak rate of $0.1675 cents per
+                kWh. It's not as much as the summer peak rate but it's still
+                8.4% more expensive to use electricity during peak hours.{" "}
+              </p>
+            </div>
+          ) : (
+            <div
+              id="consumersCardContainer"
+              className="back"
+              onClick={(e) => setFlipCard(false)}
+            >
+              <h4>
+                Consumers Peak Rates are from <span>2pm - 7pm</span>
+              </h4>
+              <p>
+                During the Summer Months (June 1st - September 30th) off-peak
+                rate is $0.167 cents per kWh and on-peak rate is $0.223 cents
+                per kwh. That means it costs 33.5% more to run an appliance
+                during peak hours.{" "}
+              </p>
+              <p>
+                From October 1st - May 31st you will pay an off-peak rate of
+                $0.157 cents per kWh and an on-peak rate of $0.17 cents per kWh.
+                It's not as much as the summer peak rate but it's still 8.3%
+                more expensive to use electricity during peak hours.{" "}
+              </p>
+            </div>
+          )}
         </div>
       </section>
       <h2>

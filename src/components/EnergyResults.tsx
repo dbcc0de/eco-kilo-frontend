@@ -117,14 +117,15 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
     <>
       <div className="EnergyResults">
         <p>Your Utility Company is: {utilityResponse?.outputs.utility_name}</p>
-        <p>Your utility rate is: {utilityRate} cents per kilowatt hour. </p>
-        <p>
-          You peak utility rate is:{" "}
-          {((utilityRate || 0.1611) * 1.37).toFixed(4)} cents per kilowatt hour.
-        </p>
         {peakCostCounter ? (
           <>
             {" "}
+            <p>Your utility rate is: {utilityRate} cents per kilowatt hour. </p>
+            <p>
+              You peak utility rate is:{" "}
+              {((utilityRate || 0.1611) * 1.37).toFixed(4)} cents per kilowatt
+              hour.
+            </p>
             <p>Peak rate costs per day: ${peakCostCounter.toFixed(2)} </p>
             <p>
               Off peak rate costs per day: ${offPeakCostCounter.toFixed(2)}{" "}

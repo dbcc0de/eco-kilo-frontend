@@ -1,5 +1,6 @@
 import "./EducationPage.css";
 import FaqList from "./FaqList";
+import streetLight from "../assets/streetlightSilo.png";
 
 const EducationPage = () => {
   return (

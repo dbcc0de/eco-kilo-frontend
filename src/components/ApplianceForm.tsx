@@ -16,14 +16,45 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
   const [applianceStop, setApplianceStop] = useState(0);
   const [addAppliance, setAddAppliance] = useState(false);
 
+  // must add noon edge case if minutes >= 720 && minutes < 780 return 12 noon
+  // convert decimals to two places
+  const convertToStandard = (minutes: number) => {
+    if (minutes < 720) {
+      if (minutes === 0) {
+        return `12:00 A.M.`;
+      } else if (minutes < 60) {
+        return `12:${minutes} A.M.`;
+      } else {
+        return `${Math.floor(minutes / 60)}:${
+          minutes % 60 === 0 ? "00" : minutes % 60
+        } A.M.`;
+      }
+    } else {
+      if (minutes === 1440) {
+        return `12:00 A.M`;
+      } else if (minutes === 720) {
+        return `12:00 P.M.`;
+      } else if (minutes > 720 && minutes < 780) {
+        return `12:${(minutes - 720) % 60} P.M`;
+      } else {
+        return `${Math.floor((minutes - 720) / 60)}:${
+          (minutes - 720) % 60 === 0 ? "00" : (minutes - 720) % 60
+        } P.M.`;
+      }
+    }
+  };
+
+  const applianceStartConversion = convertToStandard(applianceStart);
+  const applianceStopConversion = convertToStandard(applianceStop);
+
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     if (applianceStart <= applianceStop) {
       const addedAppliance: Appliance = {
         name: applianceName,
         kwh: Number(applianceKwh),
-        startTime: applianceStart,
-        endTime: applianceStop,
+        startTime: applianceStart / 60,
+        endTime: applianceStop / 60,
       };
 
       const homeCopy = {
@@ -90,30 +121,53 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
               value={applianceKwh}
               onChange={(e) => setApplianceKwh(e.target.value)}
             />
-            <label htmlFor="applianceStart">
-              Appliance Start to Stop Time:
-            </label>
+            <label htmlFor="applianceStart">Appliance Start Time:</label>
             <input
               type="range"
               // could have time scaled by 60 min (24 * 60), and step 1 min
               min={0}
-              max={24}
-              step={0.1}
+              max={1440}
+              step={15}
               name="applianceStart"
               id="applianceStart"
               value={applianceStart}
               onChange={(e) => setApplianceStart(Number(e.target.value))}
             />
-            <p>
-              {applianceStart}:00 - {applianceStop}:00
-            </p>
-            <label htmlFor="applianceStop">Appliance Start to Stop Time:</label>
+            <div id="timeConversionContainer">
+              <p>
+                <span
+                  id={
+                    applianceStart >= 900 && applianceStart <= 1140
+                      ? "peakAlert"
+                      : "null"
+                  }
+                >
+                  {applianceStartConversion}
+                </span>
+                <span
+                  id={
+                    applianceStop >= 900 && applianceStop <= 1140
+                      ? "peakAlert"
+                      : "null"
+                  }
+                >
+                  -- {applianceStopConversion}
+                </span>
+                {(applianceStop >= 900 && applianceStop <= 1140) ||
+                (applianceStart >= 900 && applianceStart <= 1140) ? (
+                  <p id="peakIndicator">Red = contains peak rate</p>
+                ) : (
+                  <></>
+                )}
+              </p>
+            </div>
+            <label htmlFor="applianceStop">Appliance Stop Time:</label>
 
             <input
               type="range"
               min={0}
-              max={24}
-              step={0.1}
+              max={1440}
+              step={15}
               name="applianceStop"
               id="applianceStop"
               value={applianceStop}
@@ -128,7 +182,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
           className="addApplianceButton"
           onClick={() => setAddAppliance(true)}
         >
-          +
+          Add
         </button>
       )}
     </div>

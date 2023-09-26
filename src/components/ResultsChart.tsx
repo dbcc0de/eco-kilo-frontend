@@ -57,8 +57,8 @@ const ResultsChart = ({ peakCostCounter, offPeakCostCounter }: Props) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="Off_Peak" fill="#82ca9d" />
-          <Bar dataKey="Peak" fill="#82ca8e" />
+          <Bar dataKey="Off_Peak" fill="#0057E9" />
+          <Bar dataKey="Peak" fill="#E11845" />
         </BarChart>
       </ResponsiveContainer>
     </div>

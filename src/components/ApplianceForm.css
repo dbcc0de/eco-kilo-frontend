@@ -5,8 +5,36 @@
   background-color: #541248;
 }
 
-.ApplianceForm button {
+.ApplianceForm form {
+  font-size: 150%;
+  border-radius: 12px;
+  border: 2px solid white;
+}
+
+.ApplianceForm .addApplianceButton {
   position: relative;
   bottom: 1em;
   border: 2px solid white;
+  font-size: 20px;
+}
+
+.ApplianceForm #applianceStop {
+  margin-bottom: 10px;
+}
+
+.ApplianceForm #timeConversionContainer {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.ApplianceForm #peakAlert {
+  color: red;
+  font-weight: bold;
+}
+
+.ApplianceForm #peakIndicator {
+  position: absolute;
+  margin: 0 0 0 5px;
+  font-size: 10px;
 }

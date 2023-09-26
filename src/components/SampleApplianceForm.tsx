@@ -1,7 +1,6 @@
 import "./SampleApplianceForm.css";
 import defaultApplianceArray from "../specs/defaultKwh";
 import { FormEvent, useState } from "react";
-import { toFormData } from "axios";
 
 const SampleApplianceForm = () => {
   const [utilityCo, setUtilityCo] = useState("");
@@ -61,9 +60,6 @@ const SampleApplianceForm = () => {
       const consumersOffPeakWinter = calcCostFunction(0.157);
       setOffPeakWinterRateCalc(consumersOffPeakWinter);
     } else {
-      let offPeakRate = 0.1611;
-      let peakRateSummer = 0.2174;
-      let peakRateWinter = 0.1748;
       const otherSummerPeak = calcCostFunction(0.2174);
       setSummerPeakRateCalc(otherSummerPeak);
       const otherWinterPeak = calcCostFunction(0.1748);
