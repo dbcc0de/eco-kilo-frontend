@@ -37,27 +37,33 @@ const HomesForm = ({ addHomeHandler }: Props) => {
   };
 
   return (
-    <form className="HomesForm" onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="homeName">Home Name:</label>
-      <input
-        type="text"
-        name="homeName"
-        id="homeName"
-        value={homeName}
-        onChange={(e) => {
-          setHomeName(e.target.value);
-        }}
-      />
-      <label htmlFor="setLocation">
-        Enter City and State:
-        <MUIMaps setCity={setCity} setState={setState} />
-      </label>
+    <div className="formContainer">
+      <h4>
+        Ready to see how much more you can save throughout the house? Submit the
+        form below to begin:
+      </h4>
+      <form className="HomesForm" onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor="homeName">Home Name:</label>
+        <input
+          type="text"
+          name="homeName"
+          id="homeName"
+          value={homeName}
+          onChange={(e) => {
+            setHomeName(e.target.value);
+          }}
+        />
+        <label htmlFor="setLocation">
+          Enter City and State:
+          <MUIMaps setCity={setCity} setState={setState} />
+        </label>
 
-      <div className="formButton">
-        <button>Submit your home data</button>
-      </div>
-      <div id="googlemaps-attribution-container"></div>
-    </form>
+        <div className="formButton">
+          <button>Submit your home data</button>
+        </div>
+        <div id="googlemaps-attribution-container"></div>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import "./SampleApplianceForm.css";
 import defaultApplianceArray from "../specs/defaultKwh";
 import { FormEvent, useState } from "react";
+import SampleBarChart from "./SampleBarChart";
 
 const SampleApplianceForm = () => {
   const [utilityCo, setUtilityCo] = useState("");
@@ -119,7 +120,7 @@ const SampleApplianceForm = () => {
         >
           <option>Select An Appliance</option>
           {defaultApplianceArray.map((item) => (
-            <option key={item.index} value={item.name}>
+            <option key={item.index + item.name} value={item.name}>
               {item.name}
             </option>
           ))}
@@ -166,6 +167,12 @@ const SampleApplianceForm = () => {
       </form>
       {showResults ? (
         <div id="dataResults">
+          <SampleBarChart
+            summerPeakRateCalc={summerPeakRateCalc}
+            winterPeakRateCalc={winterPeakRateCalc}
+            offPeakRateCalc={offPeakRateCalc}
+            offPeakWinterRateCalc={Number(offPeakWinterRateCalc)}
+          />
           <p>Cost at summer peak rate: ${summerPeakRateCalc}/day</p>
           <p>Cost at off-peak rate: ${offPeakRateCalc}/day</p>
           <p>Cost at winter peak rate: ${winterPeakRateCalc}/day</p>

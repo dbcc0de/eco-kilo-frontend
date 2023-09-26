@@ -10,17 +10,5 @@ const EducationPage = () => {
     </div>
   );
 };
-// {!showResults ? (
-//   <button
-//     className="viewEnergyButton"
-//     onClick={() => setShowResults(true)}
-//   >
-//     View My Energy Data
-//   </button>
-// ) : (
-//   <div className="popupContainer">
-//     <EnergyResults setShowResults={setShowResults} home={home} />
-//   </div>
-// )}
 
 export default EducationPage;

@@ -9,6 +9,8 @@ import logoWords from "../assets/logoWords.png";
 import wires from "../assets/wiresDefault.png";
 import dtePie from "../assets/dtePie.png";
 import SampleApplianceForm from "./SampleApplianceForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
 
 const LandingPage = () => {
   const { user } = useContext(AuthContext);
@@ -57,6 +59,7 @@ const LandingPage = () => {
           id="utilityCardContainer"
           className={`card ${flipCard ? "flip" : ""}`}
         >
+          <FontAwesomeIcon icon={faRotate} />
           {!flipCard ? (
             <div
               id="dteCardContainer"

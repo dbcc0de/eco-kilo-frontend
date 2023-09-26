@@ -52,7 +52,7 @@ const UsersPage = () => {
           />
         </>
       ) : (
-        <p>Loading Homes...</p>
+        <div className={user ? "loader" : "null"}></div>
       )}
       <HomesForm addHomeHandler={addHomeHandler} />
     </div>

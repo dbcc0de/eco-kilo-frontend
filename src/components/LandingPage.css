@@ -48,6 +48,12 @@
   font-weight: bold;
 }
 
+.LandingPage .sampleRateFormContainer h3,
+.LandingPage .sampleRateFormContainer p {
+  text-align: center;
+  margin: 0;
+}
+
 .LandingPage .blueCircle {
   border-radius: 50%;
   border: 1px solid #007ba7;
