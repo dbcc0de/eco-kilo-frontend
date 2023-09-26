@@ -1,5 +1,5 @@
-.FaqList ul #faqs {
-  padding-left: 0;
+.FaqList ul {
+  padding: 0;
   margin-left: 0;
   display: flex;
   flex-direction: column;

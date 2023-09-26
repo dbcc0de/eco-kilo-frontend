@@ -12,18 +12,21 @@ const FaqCard = ({ faq }: Props) => {
   const [displayFAQ, setDisplayFAQ] = useState(false);
   return (
     <li className="FaqCard">
-      <div id="CardContainer">
-        <div>
-          <button onClick={() => setDisplayFAQ((prev) => !prev)}>
-            {" "}
+      <div
+        id="CardContainer"
+        className={!displayFAQ ? "CardHover" : "null"}
+        onClick={() => setDisplayFAQ((prev) => !prev)}
+      >
+        <div className={displayFAQ ? "faqQuestion" : "null"}>
+          <button>
             <FontAwesomeIcon icon={faAngleDown} />
           </button>
         </div>
         <div>
           {/* <p id="appliancesLabel"> */}
 
-          <p id="faqQuestion"> {faq.question}</p>
-          {displayFAQ && <p>{faq.answer}</p>}
+          <p className={displayFAQ ? "faqQuestion" : "null"}>{faq.question}</p>
+          {displayFAQ && <p id="answerParagraph">{faq.answer}</p>}
         </div>
       </div>
     </li>
