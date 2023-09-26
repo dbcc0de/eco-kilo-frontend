@@ -1,10 +1,13 @@
 .FaqCard p {
   margin: 0;
+  cursor: pointer;
 }
 
-.FaqCard #faqQuestion {
-  background-color: lightgray;
+.FaqCard .faqQuestion {
   margin-top: 0;
+  background-color: #007ba7;
+  color: white;
+  height: 22px;
 }
 
 .FaqCard li {
@@ -13,4 +16,26 @@
 
 .FaqCard #CardContainer {
   display: flex;
+  border: solid 1px gray;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.FaqCard button {
+  border-radius: 50%;
+  height: 20px;
+  cursor: pointer;
+}
+
+.FaqCard button:hover {
+  /* transform: rotateY(180deg); */
+  background-color: #007ba7;
+}
+
+.FaqCard .CardHover:hover {
+  background-color: lightgray;
+}
+
+.FaqCard #answerParagraph:hover {
+  background-color: white;
 }
