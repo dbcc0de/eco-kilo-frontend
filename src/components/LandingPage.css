@@ -27,7 +27,7 @@
   background-color: #007ba7;
   height: 150px;
   width: 150px;
-  position: absolute;
+  /* position: absolute; */
 }
 .LandingPage .whiteCircle {
   border-radius: 50%;
@@ -35,7 +35,7 @@
   background-color: #fff;
   height: 130px;
   width: 130px;
-  position: absolute;
+  /* position: absolute; */
 }
 
 .LandingPage #logoWords {
@@ -45,8 +45,16 @@
   left: 3em;
 }
 
-.LandingPage .logoAndMeterContainer {
+.LandingPage footer {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.LandingPage footer a {
+  padding: 10px;
+  border: 2px solid #007ba7;
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -109,7 +109,7 @@ const LandingPage = () => {
           </button>
         </div>
       )}
-      <div className="logoAndMeterContainer">
+      <footer>
         <div className="blueCircle">
           <div className="whiteCircle">
             <img
@@ -119,7 +119,8 @@ const LandingPage = () => {
             />
           </div>
         </div>
-      </div>
+        <a href="/education">Education</a>
+      </footer>
     </div>
   );
 };
