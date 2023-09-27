@@ -183,16 +183,30 @@ const SampleApplianceForm = () => {
             offPeakWinterRateCalc={offPeakWinterRateCalc}
           />
           <div id="costContainer">
-            <div id="costDailyCalc">
-              <p>Cost at summer peak rate: ${summerPeakRateCalc}/day</p>
-              <p>Cost at off-peak rate: ${offPeakRateCalc}/day</p>
-              <p>Cost at winter peak rate: ${winterPeakRateCalc}/day</p>
+            <table id="costDailyCalc">
+              <tr>
+                <th>Rate</th>
+                <th>Daily Cost</th>
+              </tr>
+              <tr>
+                <td>Summer Peak</td>
+                <td>${summerPeakRateCalc}</td>
+              </tr>
+              <tr>
+                <td>Summer Off-Peak</td>
+                <td>${offPeakRateCalc}</td>
+              </tr>
+              <tr>
+                <td>Winter Peak</td>
+                <td>${winterPeakRateCalc}</td>
+              </tr>
               {offPeakWinterRateCalc && (
-                <p>
-                  Cost at off-peak winter rate: ${offPeakWinterRateCalc}/day
-                </p>
+                <tr>
+                  <td>Winter Off-Peak</td>
+                  <td>${offPeakWinterRateCalc}</td>
+                </tr>
               )}
-            </div>
+            </table>
             <div id="calcSavingsResults">
               <p>
                 By using off peak hours in the summer you could save:
@@ -200,11 +214,15 @@ const SampleApplianceForm = () => {
                   2
                 )} `}
                 a day, or
-                {` $${(
-                  Number(calcSavings(summerPeakRateCalc, offPeakRateCalc)) * 21
-                ).toFixed(2)} `}
-                a month.
+                <span>
+                  {` $${(
+                    Number(calcSavings(summerPeakRateCalc, offPeakRateCalc)) *
+                    21
+                  ).toFixed(2)} `}
+                  a month.{" "}
+                </span>
               </p>
+              <br />
               <p>
                 By using off peak hours in the winter you could save:
                 {offPeakWinterRateCalc ? (
@@ -213,13 +231,15 @@ const SampleApplianceForm = () => {
                       winterPeakRateCalc,
                       offPeakWinterRateCalc
                     ).toFixed(2)} `}
-                    a day, or
-                    {` $${(
-                      Number(
-                        calcSavings(winterPeakRateCalc, offPeakWinterRateCalc)
-                      ) * 21
-                    ).toFixed(2)} `}
-                    a month.
+                    a day, or{" "}
+                    <span>
+                      {` $${(
+                        Number(
+                          calcSavings(winterPeakRateCalc, offPeakWinterRateCalc)
+                        ) * 21
+                      ).toFixed(2)} `}
+                      a month.
+                    </span>
                   </p>
                 ) : (
                   <p>
@@ -227,12 +247,15 @@ const SampleApplianceForm = () => {
                       winterPeakRateCalc,
                       offPeakRateCalc
                     ).toFixed(2)} `}
-                    a day, or
-                    {` $${(
-                      Number(calcSavings(winterPeakRateCalc, offPeakRateCalc)) *
-                      21
-                    ).toFixed(2)} `}
-                    a month.
+                    a day, or{" "}
+                    <span>
+                      {` $${(
+                        Number(
+                          calcSavings(winterPeakRateCalc, offPeakRateCalc)
+                        ) * 21
+                      ).toFixed(2)} `}
+                      a month.
+                    </span>
                   </p>
                 )}
               </p>

@@ -84,7 +84,7 @@ const SampleBarChart = ({
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis hide axisLine={false} type="number" />
+        <XAxis type="number" />
         <YAxis
           dataKey="name"
           type="category"

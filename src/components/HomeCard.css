@@ -47,16 +47,23 @@
 
 .HomeCard ul {
   padding: 0;
-  width: 30%;
+  width: 100%;
   /* display: flex */
   /* flex-direction: row */
   /* flex-wrap: wrap */
+}
+
+.HomeCard #scrollList {
+  height: 35vh;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .HomeCard ul li {
   background-color: #20cd26;
   color: black;
   width: 20vw;
+  margin: 10px 0;
   min-width: 200px;
 }
 

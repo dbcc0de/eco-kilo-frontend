@@ -94,7 +94,6 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <label htmlFor="homeName">Home: </label>
           <input
             type="text"
-            name="homeName"
             id="homeName"
             value={homeName}
             onChange={(e) => setHomeName(e.target.value)}
@@ -231,7 +230,7 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
               View
             </button>
           ) : (
-            <ul>
+            <ul id={home.appliances?.length ? "scrollList" : "null"}>
               {home.appliances?.map((item, index) => (
                 <li key={item.name + index}>
                   <p>Name: {item.name}</p>

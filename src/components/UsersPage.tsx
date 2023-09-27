@@ -10,7 +10,7 @@ import {
 } from "../services/homeService";
 import HomesForm from "./HomesForm";
 import HomeList from "./HomeList";
-import MUIMaps from "./MUIMaps";
+import logoWords from "../assets/logoWords.png";
 
 const UsersPage = () => {
   const [homes, setHomes] = useState<Home[]>([]);
@@ -55,6 +55,17 @@ const UsersPage = () => {
         <div className={homes.length ? "loader" : "null"}></div>
       )}
       <HomesForm addHomeHandler={addHomeHandler} />
+      <footer>
+        <div className="blueCircle">
+          <div className="whiteCircle">
+            <img
+              id="logoWords"
+              src={logoWords}
+              alt="thunderbolt logo with words eco kilo"
+            />
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

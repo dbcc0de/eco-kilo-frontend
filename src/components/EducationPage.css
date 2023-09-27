@@ -6,3 +6,20 @@
 .EducationPage h2 {
   text-align: center;
 }
+
+.EducationPage #streetLightContainer {
+  position: absolute;
+  right: 1em;
+  bottom: 10%;
+  opacity: 40%;
+  z-index: -1;
+}
+
+.EducationPage #streetLightImg {
+  transform: rotate(355deg) scaleX(-1);
+}
+
+.EducationPage footer {
+  position: absolute;
+  bottom: 0;
+}
