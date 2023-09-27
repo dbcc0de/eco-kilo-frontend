@@ -2,6 +2,7 @@ import "./SampleApplianceForm.css";
 import defaultApplianceArray from "../specs/defaultKwh";
 import { FormEvent, useState } from "react";
 import SampleBarChart from "./SampleBarChart";
+import wires from "../assets/wiresDefault.png";
 
 const SampleApplianceForm = () => {
   const [utilityCo, setUtilityCo] = useState("");
@@ -39,6 +40,14 @@ const SampleApplianceForm = () => {
       rate *
       ((Number(applianceHours) * 60 + Number(applianceMins)) / 60)
     ).toFixed(2);
+  };
+
+  const calcSavings = (peak: string, offPeak: string): number => {
+    if (Number(peak) - Number(offPeak) < 1) {
+      return parseFloat((Number(peak) - Number(offPeak)).toFixed(2));
+    } else {
+      return parseFloat((Number(peak) - Number(offPeak)).toFixed(2));
+    }
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -171,17 +180,69 @@ const SampleApplianceForm = () => {
             summerPeakRateCalc={summerPeakRateCalc}
             winterPeakRateCalc={winterPeakRateCalc}
             offPeakRateCalc={offPeakRateCalc}
-            offPeakWinterRateCalc={Number(offPeakWinterRateCalc)}
+            offPeakWinterRateCalc={offPeakWinterRateCalc}
           />
-          <p>Cost at summer peak rate: ${summerPeakRateCalc}/day</p>
-          <p>Cost at off-peak rate: ${offPeakRateCalc}/day</p>
-          <p>Cost at winter peak rate: ${winterPeakRateCalc}/day</p>
-          {offPeakWinterRateCalc && (
-            <p>Cost at off-peak winter rate: ${offPeakWinterRateCalc}/day</p>
-          )}
+          <div id="costContainer">
+            <div id="costDailyCalc">
+              <p>Cost at summer peak rate: ${summerPeakRateCalc}/day</p>
+              <p>Cost at off-peak rate: ${offPeakRateCalc}/day</p>
+              <p>Cost at winter peak rate: ${winterPeakRateCalc}/day</p>
+              {offPeakWinterRateCalc && (
+                <p>
+                  Cost at off-peak winter rate: ${offPeakWinterRateCalc}/day
+                </p>
+              )}
+            </div>
+            <div id="calcSavingsResults">
+              <p>
+                By using off peak hours in the summer you could save:
+                {` $${calcSavings(summerPeakRateCalc, offPeakRateCalc).toFixed(
+                  2
+                )} `}
+                a day, or
+                {` $${(
+                  Number(calcSavings(summerPeakRateCalc, offPeakRateCalc)) * 21
+                ).toFixed(2)} `}
+                a month.
+              </p>
+              <p>
+                By using off peak hours in the winter you could save:
+                {offPeakWinterRateCalc ? (
+                  <p>
+                    {` $${calcSavings(
+                      winterPeakRateCalc,
+                      offPeakWinterRateCalc
+                    ).toFixed(2)} `}
+                    a day, or
+                    {` $${(
+                      Number(
+                        calcSavings(winterPeakRateCalc, offPeakWinterRateCalc)
+                      ) * 21
+                    ).toFixed(2)} `}
+                    a month.
+                  </p>
+                ) : (
+                  <p>
+                    {` $${calcSavings(
+                      winterPeakRateCalc,
+                      offPeakRateCalc
+                    ).toFixed(2)} `}
+                    a day, or
+                    {` $${(
+                      Number(calcSavings(winterPeakRateCalc, offPeakRateCalc)) *
+                      21
+                    ).toFixed(2)} `}
+                    a month.
+                  </p>
+                )}
+              </p>
+            </div>
+          </div>
         </div>
       ) : (
-        <p>Select an appliance and submit to see your results</p>
+        <div id="wireImgContainer">
+          <img src={wires} />
+        </div>
       )}
     </div>
   );

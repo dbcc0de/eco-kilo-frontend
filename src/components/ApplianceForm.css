@@ -13,7 +13,6 @@
 
 .ApplianceForm .addApplianceButton {
   position: relative;
-  bottom: 1em;
   border: 2px solid white;
   font-size: 20px;
 }

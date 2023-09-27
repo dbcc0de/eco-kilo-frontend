@@ -31,6 +31,32 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
     home.appliances || []
   );
 
+  const convertToStandard = (minutes: number) => {
+    if (minutes < 720) {
+      if (minutes === 0) {
+        return `12:00 A.M.`;
+      } else if (minutes < 60) {
+        return `12:${minutes} A.M.`;
+      } else {
+        return `${Math.floor(minutes / 60)}:${
+          minutes % 60 === 0 ? "00" : minutes % 60
+        } A.M.`;
+      }
+    } else {
+      if (minutes === 1440) {
+        return `12:00 A.M`;
+      } else if (minutes === 720) {
+        return `12:00 P.M.`;
+      } else if (minutes > 720 && minutes < 780) {
+        return `12:${(minutes - 720) % 60} P.M`;
+      } else {
+        return `${Math.floor((minutes - 720) / 60)}:${
+          (minutes - 720) % 60 === 0 ? "00" : (minutes - 720) % 60
+        } P.M.`;
+      }
+    }
+  };
+
   const handleEditSubmission = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     const geocodeLatLon = await getLatLon(city, state);
@@ -76,7 +102,7 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <MUIMaps setCity={setCity} setState={setState} />
           {home.appliances?.map((item, index) => {
             return (
-              <div key={item.name + index}>
+              <div id="editApplianceContainer" key={item.name + index}>
                 <label htmlFor="applianceName">Appliance Name:</label>
                 <input
                   type="text"
@@ -120,24 +146,25 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
                     })
                   }
                 />
+                <br></br>
                 <label htmlFor="applianceStart">
                   Appliance Start to Stop Time:
                 </label>
                 <input
                   type="range"
                   min={0}
-                  max={24}
-                  step={1}
+                  max={1440}
+                  step={15}
                   name="applianceStart"
                   id="applianceStart"
-                  value={appliances[index].startTime}
+                  value={appliances[index].startTime * 60}
                   onChange={(e) =>
                     setAppliances((prev) => {
                       // move this to function at top of page
                       const previousAppliance = prev[index];
                       const updatedAppliance = {
                         ...previousAppliance,
-                        startTime: Number(e.target.value),
+                        startTime: Number(e.target.value) / 60,
                       };
                       return [
                         ...prev.slice(0, index),
@@ -148,8 +175,8 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
                   }
                 />
                 <p>
-                  {appliances[index].startTime}:00 - {appliances[index].endTime}
-                  :00
+                  {convertToStandard(appliances[index].startTime * 60)} -
+                  {convertToStandard(appliances[index].endTime * 60)}
                 </p>
                 <label htmlFor="applianceEnd">
                   Appliance Start to Stop Time:
@@ -158,18 +185,18 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
                 <input
                   type="range"
                   min={0}
-                  max={24}
-                  step={1}
+                  max={1440}
+                  step={15}
                   name="applianceEnd"
                   id="applianceEnd"
-                  value={appliances[index].endTime}
+                  value={appliances[index].endTime * 60}
                   onChange={(e) =>
                     setAppliances((prev) => {
                       // move this to function at top of page
                       const previousAppliance = prev[index];
                       const updatedAppliance = {
                         ...previousAppliance,
-                        endTime: Number(e.target.value),
+                        endTime: Number(e.target.value) / 60,
                       };
                       return [
                         ...prev.slice(0, index),
@@ -209,8 +236,8 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
                 <li key={item.name + index}>
                   <p>Name: {item.name}</p>
                   <p>kWh: {item.kwh}</p>
-                  <p>Start Time: {item.startTime}</p>
-                  <p>End Time: {item.endTime}</p>
+                  <p>Start Time: {convertToStandard(item.startTime * 60)}</p>
+                  <p>End Time: {convertToStandard(item.endTime * 60)}</p>
                   <button onClick={() => handleRemoveAppliance(index)}>
                     Remove Appliance
                   </button>
@@ -231,7 +258,7 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
           <ApplianceForm home={home} editHomeHandler={editHomeHandler} />
 
           <div className="buttonContainer">
-            <button onClick={() => setOpenToEdit(true)}>Edit</button>
+            <button onClick={() => setOpenToEdit(true)}>Edit Home</button>
             <button onClick={() => deleteHomeHandler(home._id!)}>
               Delete Home
             </button>

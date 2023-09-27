@@ -33,8 +33,8 @@ const ResultsChart = ({ peakCostCounter, offPeakCostCounter }: Props) => {
   return (
     <div
       style={{
-        width: "50%",
-        height: "60%",
+        width: "90%",
+        height: "90%",
         border: "2px solid black",
         borderRadius: "12px",
         backgroundColor: "white",

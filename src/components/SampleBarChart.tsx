@@ -15,7 +15,7 @@ interface Props {
   summerPeakRateCalc: string;
   winterPeakRateCalc: string;
   offPeakRateCalc: string;
-  offPeakWinterRateCalc: number;
+  offPeakWinterRateCalc: string;
 }
 
 const SampleBarChart = ({
@@ -30,82 +30,80 @@ const SampleBarChart = ({
     data = [
       {
         name: "Off Peak Summer",
-        rate: Number(offPeakRateCalc),
+        cost: Number(offPeakRateCalc),
         fill: "#8884d8",
       },
       {
         name: "Peak Summer",
-        rate: Number(summerPeakRateCalc),
+        cost: Number(summerPeakRateCalc),
         fill: "#E11845",
       },
       {
-        name: "Peak Winter",
-        rate: Number(winterPeakRateCalc),
-        fill: "#82ca8e",
+        name: "Off Peak Winter",
+        cost: Number(offPeakWinterRateCalc),
+        fill: "#ADD8E6",
       },
       {
-        name: "Off Peak Winter",
-        rate: Number(offPeakWinterRateCalc),
-        fill: "#82ca9d",
+        name: "Peak Winter",
+        cost: Number(winterPeakRateCalc),
+        fill: "#82ca8e",
       },
     ];
   } else {
     data = [
       {
-        name: "Off Peak Summer",
-        rate: Number(offPeakRateCalc),
+        name: "Off Peak",
+        cost: Number(offPeakRateCalc),
         fill: "#8884d8",
       },
       {
         name: "Peak Summer",
-        rate: Number(summerPeakRateCalc),
+        cost: Number(summerPeakRateCalc),
         fill: "#E11845",
       },
       {
         name: "Peak Winter",
-        rate: Number(winterPeakRateCalc),
+        cost: Number(winterPeakRateCalc),
         fill: "#82ca8e",
       },
     ];
   }
 
   return (
-    <BarChart
-      width={500}
-      height={300}
-      data={data}
-      layout="vertical"
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis hide axisLine={false} type="number" />
-      <YAxis
-        dataKey="name"
-        type="category"
-        axisLine={false}
-        tickLine={false}
-        // tick={YAxisLeftTick}
-      />
-      <YAxis
-        orientation="right"
-        type="category"
-        axisLine={false}
-        tickLine={false}
-        tickFormatter={(value) => value.toLocaleString()}
-        mirror
-        // tick={{
-        //   transform: `translate(${maxTextWidth + BAR_AXIS_SPACE}, 0)`,
-        // }}
-      />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="rate" />
-    </BarChart>
+    <ResponsiveContainer width="95%" height={400}>
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        layout="vertical"
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis hide axisLine={false} type="number" />
+        <YAxis
+          dataKey="name"
+          type="category"
+          axisLine={false}
+          tickLine={false}
+        />
+        <YAxis
+          orientation="right"
+          type="category"
+          axisLine={false}
+          tickLine={false}
+          tickFormatter={(value) => value.toLocaleString()}
+          mirror
+        />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="cost" />
+      </BarChart>
+    </ResponsiveContainer>
   );
 };
 

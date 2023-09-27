@@ -124,7 +124,6 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
             <label htmlFor="applianceStart">Appliance Start Time:</label>
             <input
               type="range"
-              // could have time scaled by 60 min (24 * 60), and step 1 min
               min={0}
               max={1440}
               step={15}
@@ -151,7 +150,7 @@ const ApplianceForm = ({ home, editHomeHandler }: Props) => {
                       : "null"
                   }
                 >
-                  -- {applianceStopConversion}
+                  — {applianceStopConversion}
                 </span>
                 {(applianceStop >= 900 && applianceStop <= 1140) ||
                 (applianceStart >= 900 && applianceStart <= 1140) ? (

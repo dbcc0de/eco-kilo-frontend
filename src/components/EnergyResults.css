@@ -9,3 +9,21 @@
   flex-direction: column;
   align-items: center;
 }
+
+#energyResultsContainer {
+  display: flex;
+  align-items: center;
+}
+
+#barResultsContainer {
+  width: 80vw;
+  height: 65vh;
+}
+
+@media only screen and (max-width: 600px) {
+  #energyResultsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}

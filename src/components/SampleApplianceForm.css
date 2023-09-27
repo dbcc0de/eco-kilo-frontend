@@ -5,22 +5,34 @@
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  width: 50vw;
   padding: 10px;
 }
 
 #formAndShowDataContainer {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
+  justify-content: space-between;
+}
+
+#dataResults {
+  width: 94vw;
 }
 
 .SampleApplianceForm #radioContainer {
   display: flex;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 674px) {
   .SampleApplianceForm #radioContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .SampleApplianceForm {
+    width: 80vw;
+  }
+  #formAndShowDataContainer {
     display: flex;
     flex-direction: column;
   }

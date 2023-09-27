@@ -1,3 +1,7 @@
+.LandingPage {
+  margin: 0 10px;
+}
+
 .LandingPage h2,
 .LandingPage h3 {
   text-align: center;
@@ -7,8 +11,8 @@
   height: 40px;
 }
 
-.LandingPage #pieChartIntro p {
-  margin: 0;
+.LandingPage #pieChartIntro {
+  margin: 0 10px;
 }
 
 .LandingPage #peakVisualContainer {
@@ -23,6 +27,12 @@
 
 .LandingPage #utilityCardContainer h4 {
   text-align: center;
+  margin-top: 0;
+}
+
+.LandingPage #utilityCardContainer p {
+  margin: 10px 5px 0 5px;
+  font-size: 1em;
 }
 
 .LandingPage .card {
@@ -34,6 +44,21 @@
   cursor: pointer;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
+}
+
+.LandingPage #dteCardContainer {
+  background-color: #046307;
+  color: white;
+}
+
+.LandingPage #consumersCardContainer {
+  background-color: #541248;
+  color: white;
+}
+
+.LandingPage #flipIcon {
+  width: 30px;
+  height: 30px;
 }
 
 .LandingPage .flip {

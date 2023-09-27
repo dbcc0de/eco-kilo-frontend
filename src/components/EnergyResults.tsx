@@ -114,7 +114,7 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
   };
 
   return (
-    <>
+    <div id="energyResultsContainer">
       <div className="EnergyResults">
         <p>Your Utility Company is: {utilityResponse?.outputs.utility_name}</p>
         {peakCostCounter ? (
@@ -165,11 +165,13 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
           </button>
         </div>
       </div>
-      <ResultsChart
-        peakCostCounter={peakCostCounter}
-        offPeakCostCounter={offPeakCostCounter}
-      />
-    </>
+      <div id="barResultsContainer">
+        <ResultsChart
+          peakCostCounter={peakCostCounter}
+          offPeakCostCounter={offPeakCostCounter}
+        />
+      </div>
+    </div>
   );
 };
 
