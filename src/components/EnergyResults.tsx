@@ -116,24 +116,46 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
   return (
     <div id="energyResultsContainer">
       <div className="EnergyResults">
-        <p>Your Utility Company is: {utilityResponse?.outputs.utility_name}</p>
+        <p>
+          Your Utility Company is: <br />
+          {utilityResponse?.outputs.utility_name}
+        </p>
         {peakCostCounter ? (
           <>
-            {" "}
-            <p>Your utility rate is: {utilityRate} cents per kilowatt hour. </p>
-            <p>
-              You peak utility rate is:{" "}
-              {((utilityRate || 0.1611) * 1.37).toFixed(4)} cents per kilowatt
-              hour.
-            </p>
+            <table>
+              <tr>
+                <th>Utility Rate</th>
+                <th>Peak Utility Rate</th>
+              </tr>
+              <tr>
+                <td>${utilityRate} / kWh</td>
+                <td>${((utilityRate || 0.1611) * 1.37).toFixed(4)} / kWh.</td>
+              </tr>
+              <tr>
+                <th>Off Peak Costs Per Day</th>
+                <th>Peak Costs Per Day</th>
+              </tr>
+              <tr>
+                <td>${offPeakCostCounter.toFixed(2)}</td>
+                <td>${peakCostCounter.toFixed(2)}</td>
+              </tr>
+              <div id="totalCosts">
+                <tr>
+                  <th>Total Cost per day</th>
+                  <th>
+                    <span>
+                      ${(offPeakCostCounter + peakCostCounter).toFixed(2)}
+                    </span>
+                  </th>
+                </tr>
+              </div>
+              <tr></tr>
+            </table>
             <p>Peak rate costs per day: ${peakCostCounter.toFixed(2)} </p>
             <p>
               Off peak rate costs per day: ${offPeakCostCounter.toFixed(2)}{" "}
             </p>
-            <p>
-              Total costs per day: $
-              {(offPeakCostCounter + peakCostCounter).toFixed(2)}
-            </p>
+            <p>Total costs per day: $</p>
           </>
         ) : (
           <p>Press Calculate to see your costs</p>

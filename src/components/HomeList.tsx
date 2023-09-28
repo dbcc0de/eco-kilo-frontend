@@ -17,6 +17,7 @@ const HomeList = ({ homes, deleteHomeHandler, editHomeHandler }: Props) => {
     <ul className="HomeList">
       {homes.map((item, index) => (
         <HomeCard
+          length={homes.length}
           home={item}
           key={item._id}
           deleteHomeHandler={deleteHomeHandler}

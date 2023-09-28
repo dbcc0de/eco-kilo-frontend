@@ -9,6 +9,19 @@
   left: 45%;
 }
 
+.UsersPage footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UsersPage footer a {
+  padding: 10px;
+  border: 2px solid #007ba7;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

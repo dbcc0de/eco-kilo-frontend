@@ -8,14 +8,21 @@ import EnergyResults from "./EnergyResults";
 import MUIMaps from "./MUIMaps";
 import { getLatLon } from "../services/latLonService";
 import ApplianceForm from "./ApplianceForm";
+import HomesForm from "./HomesForm";
 
 interface Props {
   home: Home;
   deleteHomeHandler: (id: string) => void;
   editHomeHandler: (home: Home) => void;
+  length: number;
 }
 
-const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
+const HomeCard = ({
+  home,
+  deleteHomeHandler,
+  editHomeHandler,
+  length,
+}: Props) => {
   const [openToEdit, setOpenToEdit] = useState(false);
   const { user } = useContext(AuthContext);
   const [homeName, setHomeName] = useState(home.name || "");
@@ -261,20 +268,19 @@ const HomeCard = ({ home, deleteHomeHandler, editHomeHandler }: Props) => {
             <button onClick={() => deleteHomeHandler(home._id!)}>
               Delete Home
             </button>
-
-            {!showResults ? (
-              <button
-                className="viewEnergyButton"
-                onClick={() => setShowResults(true)}
-              >
-                View My Energy Data
-              </button>
-            ) : (
-              <div className="popupContainer">
-                <EnergyResults setShowResults={setShowResults} home={home} />
-              </div>
-            )}
           </div>
+          {!showResults ? (
+            <button
+              className="viewEnergyButton"
+              onClick={() => setShowResults(true)}
+            >
+              View My Energy Data
+            </button>
+          ) : (
+            <div className="popupContainer">
+              <EnergyResults setShowResults={setShowResults} home={home} />
+            </div>
+          )}
         </>
       )}
     </li>

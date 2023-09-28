@@ -48,7 +48,7 @@
   height: 10em;
 }
 
-@media only screen and (max-width: 410px) {
+@media only screen and (max-width: 440px) {
   .Header #titleWhite {
     width: 125px;
   }
@@ -56,5 +56,13 @@
   .Header p {
     margin: 0;
     font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .Header {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 }

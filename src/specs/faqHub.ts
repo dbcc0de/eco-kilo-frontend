@@ -34,7 +34,7 @@ const allFaqs: Faq[] = [
   {
     question: "Why Eco Kilo?",
     answer:
-      "Eco comes from the Greek, οἶκος (oikos), or household, and kilo from the Greek, χίλιοι (khelioi), or one thousand. What if one thousand households had more money in their pockets?",
+      "Eco comes from the Greek, οἶκος (oikos), or household, and kilo from the Greek, χίλιοι (khelioi), or one thousand. What if one thousand households had more money in their pockets and reduced stress on the electical grid?",
   },
 ];
 

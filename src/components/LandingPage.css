@@ -1,10 +1,30 @@
-.LandingPage {
-  margin: 0 10px;
-}
-
 .LandingPage h2,
 .LandingPage h3 {
   text-align: center;
+  margin: 0 10px;
+}
+
+.LandingPage #landingIntro {
+  position: relative;
+}
+
+.LandingPage #landingIntro h2 {
+  position: absolute;
+  text-align: left;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .LandingPage #landingIntro h2 {
+    font-size: 12px;
+  }
+}
+
+.LandingPage #overPeakImg {
+  width: 100%;
+  margin: 0;
 }
 
 .LandingPage .signInButton {
@@ -15,10 +35,17 @@
   margin: 0 10px;
 }
 
+.LandingPage #pieChartIntro #pieChartIntroPara {
+  color: white;
+  font-size: 1.5em;
+}
+
 .LandingPage #peakVisualContainer {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #007ba7;
+  width: 100%;
 }
 
 .LandingPage #dtePie {
@@ -44,6 +71,7 @@
   cursor: pointer;
   transform: perspective(1000px) rotateY(var(--rotate-y, 0))
     translateY(var(--translate-y, 0));
+  margin: 0 10px;
 }
 
 .LandingPage #dteCardContainer {
@@ -71,6 +99,52 @@
 
 .LandingPage span {
   font-weight: bold;
+}
+
+.LandingPage #chosenContainer {
+  display: inline-block;
+  background-color: rgb(203, 197, 197);
+  margin: 0;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.LandingPage #selectUtilityContainer p {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.LandingPage .chosenUtility {
+  background-color: white;
+  color: #007ba7;
+  border-radius: 10px;
+  padding: 2px;
+  transition: 800ms;
+}
+
+.LandingPage #thoughtBubble {
+  height: 30vh;
+  width: 50vw;
+}
+
+.LandingPage #thoughtContainer p {
+  margin: 0;
+  position: relative;
+  width: 46vw;
+  bottom: 8em;
+  left: 14em;
+}
+
+.LandingPage table {
+  width: 100%;
+  font-size: 18px;
+}
+
+.LandingPage tr,
+.LandingPage td {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .LandingPage .sampleRateFormContainer h3,
@@ -113,15 +187,19 @@
   padding: 10px;
   border: 2px solid #007ba7;
   border-radius: 10px;
+  margin-right: 20px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .LandingPage #peakVisualContainer {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   .LandingPage #dtePie {
     width: 80vw;
+    position: relative;
+    left: 10%;
   }
 }

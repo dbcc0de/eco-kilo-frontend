@@ -23,7 +23,7 @@ const UsersPage = () => {
     (async () => {
       await loadUserHomesHandler();
     })();
-  }, [user]);
+  }, [homes]);
 
   const addHomeHandler = async (home: Home): Promise<void> => {
     await addHome(home);
@@ -52,7 +52,7 @@ const UsersPage = () => {
           />
         </>
       ) : (
-        <div className={homes.length ? "loader" : "null"}></div>
+        <div className={user ? "loader" : "null"}></div>
       )}
       <HomesForm addHomeHandler={addHomeHandler} />
       <footer>
@@ -65,6 +65,7 @@ const UsersPage = () => {
             />
           </div>
         </div>
+        <a href="/education">Education</a>
       </footer>
     </div>
   );
