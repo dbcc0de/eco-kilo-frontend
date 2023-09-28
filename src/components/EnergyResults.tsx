@@ -151,11 +151,6 @@ const EnergyResults = ({ home, setShowResults }: Props) => {
               </div>
               <tr></tr>
             </table>
-            <p>Peak rate costs per day: ${peakCostCounter.toFixed(2)} </p>
-            <p>
-              Off peak rate costs per day: ${offPeakCostCounter.toFixed(2)}{" "}
-            </p>
-            <p>Total costs per day: $</p>
           </>
         ) : (
           <p>Press Calculate to see your costs</p>

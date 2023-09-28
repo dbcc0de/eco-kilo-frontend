@@ -123,8 +123,28 @@
 }
 
 .LandingPage #thoughtBubble {
-  height: 30vh;
+  /* height: 30vh; */
+  width: 40vw;
+}
+
+.LandingPage #thoughtSampleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LandingPage #sampleContainer {
+  background-color: #541248;
   width: 50vw;
+  color: white;
+  border: 2px solid white;
+  border-radius: 12px;
+  height: 30vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .LandingPage #thoughtContainer p {

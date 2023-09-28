@@ -33,10 +33,7 @@ const LandingPage = () => {
   return (
     <div className="LandingPage">
       <div id="landingIntro">
-        <h2>
-          Is your utility company raising rates at peak hours? Do you know how
-          much that could cost you?
-        </h2>
+        <h2>Is your utility company raising rates at peak hours?</h2>
         <div id="overPeakContainer">
           <img
             src={overPeak}
@@ -162,14 +159,16 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-      <h2>
+      <div id="thoughtSampleContainer">
         <div id="thoughtContainer">
           <img id="thoughtBubble" src={thoughtBubble} alt="thought bubble" />
         </div>
-      </h2>
+        <div id="sampleContainer">
+          <h3>Try Our Sample Appliance Form</h3>
+          <p>(it will enter the standard kwh for the average appliance)</p>
+        </div>
+      </div>
       <div className="sampleRateFormContainer">
-        <h3>Try Our Sample Appliance Form</h3>
-        <p>(it will enter the standard kwh for the average appliance)</p>
         <SampleApplianceForm />
       </div>
 
